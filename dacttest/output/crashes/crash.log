@@ -1,0 +1,3640 @@
+input : README.txt
+
+=================================================================
+==1104896==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1024 byte(s) in 2 object(s) allocated from:
+    #0 0x5634e989f30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5634e98da79a in dact_config_loadfile /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:156:7
+    #2 0x7f62ed829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: 1024 byte(s) leaked in 2 allocation(s).
+input : id:000000,sig:11,src:000000,op:flip1,pos:20
+=================================================================
+==1104899==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7fe04b6cc80b at pc 0x56357b8a66ea bp 0x7ffd5ca48d40 sp 0x7ffd5ca48510
+WRITE of size 747621 at 0x7fe04b6cc80b thread T0
+    #0 0x56357b8a66e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56357b8e8300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x56357b8e5a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x56357b8e5a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x56357b8ebb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fe04b429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fe04b429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56357b8244c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7fe04b6cc80b is located 0 bytes to the right of 524299-byte region [0x7fe04b64c800,0x7fe04b6cc80b)
+allocated by thread T0 here:
+    #0 0x56357b8a730e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56357b8e524b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x56357b8ebb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fe04b429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0ffc896d18b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffc896d18c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffc896d18d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffc896d18e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffc896d18f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0ffc896d1900: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffc896d1910: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffc896d1920: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffc896d1930: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffc896d1940: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffc896d1950: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104899==ABORTING
+input : id:000001,sig:06,src:000000,op:flip1,pos:21
+=================================================================
+==1104901==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x61d00000088b at pc 0x55af45f7b6ea bp 0x7fff5789a040 sp 0x7fff57899810
+WRITE of size 2920 at 0x61d00000088b thread T0
+    #0 0x55af45f7b6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55af45fbd300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55af45fbaa07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55af45fbaa07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55af45fc0b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fa2a6029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fa2a6029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55af45ef94c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x61d00000088b is located 0 bytes to the right of 2059-byte region [0x61d000000080,0x61d00000088b)
+allocated by thread T0 here:
+    #0 0x55af45f7c30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55af45fba24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55af45fc0b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fa2a6029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c3a7fff80c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c3a7fff80d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c3a7fff80e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c3a7fff80f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c3a7fff8100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c3a7fff8110: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c3a7fff8120: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c3a7fff8130: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c3a7fff8140: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c3a7fff8150: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c3a7fff8160: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104901==ABORTING
+input : id:000002,sig:11,src:000000,op:flip1,pos:47
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104903==ERROR: AddressSanitizer: SEGV on unknown address 0x55dffabc6138 (pc 0x55df6387937b bp 0x7ffdf06d47c0 sp 0x7ffdf06d3b20 T0)
+==1104903==The signal is caused by a READ memory access.
+    #0 0x55df6387937b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x55df6387fb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f77f6629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f77f6629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55df637b84c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104903==ABORTING
+input : id:000003,sig:06,src:000000,op:flip1,pos:55
+=================================================================
+==1104905==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000003b at pc 0x562877a656ea bp 0x7fff61feb420 sp 0x7fff61feabf0
+WRITE of size 139 at 0x60200000003b thread T0
+    #0 0x562877a656e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x562877aa7300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x562877aa4a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x562877aa4a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x562877aaab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f69ff229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f69ff229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5628779e34c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000003b is located 0 bytes to the right of 11-byte region [0x602000000030,0x60200000003b)
+allocated by thread T0 here:
+    #0 0x562877a6630e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x562877aa424b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x562877aaab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f69ff229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa fd fd fa fa 00[03]fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104905==ABORTING
+input : id:000004,sig:11,src:000000,op:arith8,pos:28,val:+5
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104907==ERROR: AddressSanitizer: SEGV on unknown address 0x55ea7f7cb420 (pc 0x55e90bd4337b bp 0x7ffe9fab69e0 sp 0x7ffe9fab5d40 T0)
+==1104907==The signal is caused by a READ memory access.
+    #0 0x55e90bd4337b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x55e90bd49b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7fac8c029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7fac8c029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55e90bc824c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104907==ABORTING
+input : id:000005,sig:06,src:000000,op:int16,pos:55,val:+0
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104909==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000003b at pc 0x55dc39e5b6ea bp 0x7ffef51b2d80 sp 0x7ffef51b2550
+WRITE of size 101 at 0x60200000003b thread T0
+    #0 0x55dc39e5b6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55dc39e9d300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55dc39e9aa07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55dc39e9aa07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55dc39ea0b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fe02e229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fe02e229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55dc39dd94c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000003b is located 0 bytes to the right of 11-byte region [0x602000000030,0x60200000003b)
+allocated by thread T0 here:
+    #0 0x55dc39e5c30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55dc39e9a24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55dc39ea0b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fe02e229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa fd fd fa fa 00[03]fa fa fd fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104909==ABORTING
+input : id:000006,sig:06,src:000000,op:int32,pos:26,val:be:+32
+=================================================================
+==1104912==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x558e59c796ea bp 0x7ffe79d4d0e0 sp 0x7ffe79d4c8b0
+WRITE of size 32 at 0x60200000001b thread T0
+    #0 0x558e59c796e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x558e59cbb300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x558e59cb8a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x558e59cb8a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x558e59cbeb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f37dcc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f37dcc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x558e59bf74c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x558e59c7a30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x558e59cb824b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x558e59cbeb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f37dcc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104912==ABORTING
+input : id:000007,sig:06,src:000000,op:int32,pos:27,val:+4096
+dact: Algorithm unavailble.
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104914==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x55580d8d56ea bp 0x7fff7f3704e0 sp 0x7fff7f36fcb0
+WRITE of size 104 at 0x60200000001b thread T0
+    #0 0x55580d8d56e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55580d917300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55580d914a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55580d914a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55580d91ab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fe0fe429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fe0fe429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55580d8534c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x55580d8d630e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55580d91424b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55580d91ab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fe0fe429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fd fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104914==ABORTING
+input : id:000008,sig:06,src:000000,op:int32,pos:54,val:+256
+=================================================================
+==1104916==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000003b at pc 0x560be13996ea bp 0x7ffe3d8eef00 sp 0x7ffe3d8ee6d0
+WRITE of size 108 at 0x60200000003b thread T0
+    #0 0x560be13996e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x560be13db300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x560be13d8a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x560be13d8a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x560be13deb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f98b4429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f98b4429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x560be13174c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000003b is located 0 bytes to the right of 11-byte region [0x602000000030,0x60200000003b)
+allocated by thread T0 here:
+    #0 0x560be139a30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x560be13d824b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x560be13deb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f98b4429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa fd fd fa fa 00[03]fa fa fd fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104916==ABORTING
+input : id:000009,sig:06,src:000000,op:havoc,rep:8
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104918==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x624000003e0b at pc 0x55f5821a56ea bp 0x7fff27247340 sp 0x7fff27246b10
+WRITE of size 61183 at 0x624000003e0b thread T0
+    #0 0x55f5821a56e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f5821e7300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55f5821e4a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55f5821e4a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55f5821eab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fd598e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fd598e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55f5821234c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x624000003e0b is located 0 bytes to the right of 7435-byte region [0x624000002100,0x624000003e0b)
+allocated by thread T0 here:
+    #0 0x55f5821a630e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f5821e424b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55f5821eab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fd598e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c487fff8770: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c487fff8780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c487fff8790: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c487fff87a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c487fff87b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c487fff87c0: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c487fff87d0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c487fff87e0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c487fff87f0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c487fff8800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c487fff8810: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104918==ABORTING
+input : id:000010,sig:06,src:000000,op:havoc,rep:4
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104920==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x56086e5416ea bp 0x7ffe2eb5cda0 sp 0x7ffe2eb5c570
+WRITE of size 26 at 0x60200000001b thread T0
+    #0 0x56086e5416e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56086e583300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x56086e580a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x56086e580a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x56086e586b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fe6cfc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fe6cfc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56086e4bf4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x56086e54230e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56086e58024b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x56086e586b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fe6cfc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8010: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104920==ABORTING
+input : id:000011,sig:11,src:000000,op:havoc,rep:32
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+=================================================================
+==1104922==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffd9d4629a0 at pc 0x564cfe9c1a74 bp 0x7ffd9d462090 sp 0x7ffd9d462088
+WRITE of size 8 at 0x7ffd9d4629a0 thread T0
+    #0 0x564cfe9c1a73 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40
+    #1 0x564cfe9c5b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7feff1629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7feff1629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x564cfe8fe4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+Address 0x7ffd9d4629a0 is located in stack of thread T0 at offset 2304 in frame
+    #0 0x564cfe9bcebf in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:249
+
+  This frame has 16 object(s):
+    [32, 36) 'cipher.addr'
+    [48, 192) 'filestats' (line 250)
+    [256, 2304) 'file_extd_urls' (line 252) <== Memory access at offset 2304 overflows this variable
+    [2432, 2433) 'algo' (line 253)
+    [2448, 2449) 'ch' (line 254)
+    [2464, 2472) 'hdr_buf' (line 255)
+    [2496, 2499) 'version' (line 257)
+    [2512, 2513) 'file_opts' (line 258)
+    [2528, 2536) 'filesize' (line 260)
+    [2560, 2564) 'blk_cnt' (line 261)
+    [2576, 2580) 'file_extd_size' (line 261)
+    [2592, 2596) 'blksize' (line 261)
+    [2608, 2612) 'blksize_uncomp' (line 261)
+    [2624, 2628) 'magic' (line 262)
+    [2640, 2644) 'x' (line 265)
+    [2656, 2664) 'offset' (line 266)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40 in dact_process_file
+Shadow bytes around the buggy address:
+  0x100033a844e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a844f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a84500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a84510: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a84520: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x100033a84530: 00 00 00 00[f2]f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2
+  0x100033a84540: f2 f2 f2 f2 01 f2 01 f2 00 f2 f2 f2 03 f2 01 f2
+  0x100033a84550: 00 f2 f2 f2 04 f2 04 f2 04 f2 04 f2 04 f2 04 f2
+  0x100033a84560: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a84570: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100033a84580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104922==ABORTING
+input : id:000012,sig:06,src:000000,op:havoc,rep:8
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+=================================================================
+==1104924==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000011 at pc 0x55b1b78626ea bp 0x7ffe4071efa0 sp 0x7ffe4071e770
+WRITE of size 26 at 0x602000000011 thread T0
+    #0 0x55b1b78626e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55b1b78a4300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55b1b78a1a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55b1b78a1a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55b1b78a7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f0f30e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f0f30e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55b1b77e04c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000011 is located 0 bytes to the right of 1-byte region [0x602000000010,0x602000000011)
+allocated by thread T0 here:
+    #0 0x55b1b786330e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55b1b78a124b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55b1b78a7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f0f30e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[01]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104924==ABORTING
+input : id:000013,sig:11,src:000000,op:havoc,rep:8
+=================================================================
+==1104926==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000011 at pc 0x55f0fbc5c6ea bp 0x7fffc5cfb660 sp 0x7fffc5cfae30
+WRITE of size 4 at 0x602000000011 thread T0
+    #0 0x55f0fbc5c6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f0fbc9e300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55f0fbc9ba07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55f0fbc9ba07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55f0fbca1b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fed45a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fed45a29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55f0fbbda4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000011 is located 0 bytes to the right of 1-byte region [0x602000000010,0x602000000011)
+allocated by thread T0 here:
+    #0 0x55f0fbc5d30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f0fbc9b24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55f0fbca1b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fed45a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[01]fa fa fa 04 fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104926==ABORTING
+input : id:000014,sig:06,src:000000,op:havoc,rep:4
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+=================================================================
+==1104928==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x5576c1e026ea bp 0x7ffd59500fe0 sp 0x7ffd595007b0
+WRITE of size 26 at 0x60200000001b thread T0
+    #0 0x5576c1e026e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5576c1e44300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x5576c1e41a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x5576c1e41a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x5576c1e47b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f0df5429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f0df5429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5576c1d804c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x5576c1e0330e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5576c1e4124b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x5576c1e47b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f0df5429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8010: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8020: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8030: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8040: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8050: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104928==ABORTING
+input : id:000015,sig:06,src:000000,op:havoc,rep:4
+=================================================================
+==1104930==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000003b at pc 0x5603f80446ea bp 0x7ffe08d1dfa0 sp 0x7ffe08d1d770
+WRITE of size 128 at 0x60200000003b thread T0
+    #0 0x5603f80446e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5603f8086300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x5603f8083a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x5603f8083a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x5603f8089b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f026a629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f026a629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5603f7fc24c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000003b is located 0 bytes to the right of 11-byte region [0x602000000030,0x60200000003b)
+allocated by thread T0 here:
+    #0 0x5603f804530e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5603f808324b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x5603f8089b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f026a629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa fd fd fa fa 00[03]fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104930==ABORTING
+input : id:000016,sig:11,src:000000,op:havoc,rep:2
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104932==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7f29994e9200 at pc 0x55a9419b26ea bp 0x7ffec268c920 sp 0x7ffec268c0f0
+WRITE of size 1704960 at 0x7f29994e9200 thread T0
+    #0 0x55a9419b26e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55a9419f4300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55a9419f1a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55a9419f1a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55a9419f7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f2999229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f2999229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55a9419304c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7f29994e9200 is located 0 bytes to the right of 535040-byte region [0x7f2999466800,0x7f29994e9200)
+allocated by thread T0 here:
+    #0 0x55a9419b330e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55a9419f124b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55a9419f7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f2999229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0fe5b32951f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe5b3295200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe5b3295210: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe5b3295220: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe5b3295230: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0fe5b3295240:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe5b3295250: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe5b3295260: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe5b3295270: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe5b3295280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe5b3295290: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104932==ABORTING
+input : id:000017,sig:06,src:000000,op:havoc,rep:2
+dact: Algorithm unavailble.
+dact: Decompression resulted in 0-byte block.
+dact: read: No such file or directory
+=================================================================
+==1104934==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x55f22cc5c6ea bp 0x7ffcab47b240 sp 0x7ffcab47aa10
+WRITE of size 46 at 0x60200000001b thread T0
+    #0 0x55f22cc5c6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f22cc9e300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55f22cc9ba07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55f22cc9ba07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55f22cca1b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fa812029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fa812029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55f22cbda4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x55f22cc5d30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55f22cc9b24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55f22cca1b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fa812029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104934==ABORTING
+input : id:000018,sig:11,src:000000,op:havoc,rep:16
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+=================================================================
+==1104936==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000012 at pc 0x5559d2f7f6ea bp 0x7ffe29b8a760 sp 0x7ffe29b89f30
+WRITE of size 6 at 0x602000000012 thread T0
+    #0 0x5559d2f7f6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5559d2fc1300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x5559d2fbea07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x5559d2fbea07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x5559d2fc4b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f5fc8c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f5fc8c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5559d2efd4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000012 is located 0 bytes to the right of 2-byte region [0x602000000010,0x602000000012)
+allocated by thread T0 here:
+    #0 0x5559d2f8030e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5559d2fbe24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x5559d2fc4b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f5fc8c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[02]fa fa fa 06 fa fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104936==ABORTING
+input : id:000019,sig:06,src:000005,op:havoc,rep:2
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: Decompression resulted in 0-byte block.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+dact: **WARNING** This file uses the old DACT file header, support will go away in future versions for this.
+=================================================================
+==1104938==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000031 at pc 0x5594b32266ea bp 0x7ffcd9c5ab80 sp 0x7ffcd9c5a350
+WRITE of size 26 at 0x602000000031 thread T0
+    #0 0x5594b32266e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5594b3268300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x5594b3265a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x5594b3265a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x5594b326bb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f68ea229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f68ea229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5594b31a44c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000031 is located 0 bytes to the right of 1-byte region [0x602000000030,0x602000000031)
+allocated by thread T0 here:
+    #0 0x5594b322730e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5594b326524b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x5594b326bb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f68ea229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa fd fa fa fa[01]fa fa fa fd fa fa fa fd fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104938==ABORTING
+input : id:000020,sig:11,src:000027,op:flip1,pos:47
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104940==ERROR: AddressSanitizer: SEGV on unknown address 0x55d2f380f138 (pc 0x55d25c4c237b bp 0x7ffed6b3ce00 sp 0x7ffed6b3c160 T0)
+==1104940==The signal is caused by a READ memory access.
+    #0 0x55d25c4c237b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x55d25c4c8b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7fe435229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7fe435229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55d25c4014c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104940==ABORTING
+input : id:000021,sig:11,src:000029,op:flip1,pos:20
+=================================================================
+==1104942==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7fb9a66b480b at pc 0x5570ad8956ea bp 0x7ffcd707bb00 sp 0x7ffcd707b2d0
+WRITE of size 747621 at 0x7fb9a66b480b thread T0
+    #0 0x5570ad8956e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5570ad8d7300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x5570ad8d4a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x5570ad8d4a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x5570ad8dab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fb9a6429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fb9a6429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5570ad8134c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7fb9a66b480b is located 0 bytes to the right of 524299-byte region [0x7fb9a6634800,0x7fb9a66b480b)
+allocated by thread T0 here:
+    #0 0x5570ad89630e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5570ad8d424b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x5570ad8dab01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fb9a6429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0ff7b4cce8b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff7b4cce8c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff7b4cce8d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff7b4cce8e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff7b4cce8f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0ff7b4cce900: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff7b4cce910: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff7b4cce920: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff7b4cce930: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff7b4cce940: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff7b4cce950: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104942==ABORTING
+input : id:000022,sig:11,src:000030,op:flip1,pos:20
+=================================================================
+==1104944==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7f803c4fe80b at pc 0x55df745336ea bp 0x7ffd39443780 sp 0x7ffd39442f50
+WRITE of size 747621 at 0x7f803c4fe80b thread T0
+    #0 0x55df745336e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55df74575300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55df74572a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55df74572a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55df74578b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f803cc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f803cc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55df744b14c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7f803c4fe80b is located 0 bytes to the right of 524299-byte region [0x7f803c47e800,0x7f803c4fe80b)
+allocated by thread T0 here:
+    #0 0x55df7453430e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55df7457224b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55df74578b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f803cc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0ff087897cb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff087897cc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff087897cd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff087897ce0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ff087897cf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0ff087897d00: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff087897d10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff087897d20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff087897d30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff087897d40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ff087897d50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104944==ABORTING
+input : id:000023,sig:11,src:000030,op:havoc,rep:8
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+=================================================================
+==1104946==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fffc949a6e0 at pc 0x56246cf21a74 bp 0x7fffc9499dd0 sp 0x7fffc9499dc8
+WRITE of size 8 at 0x7fffc949a6e0 thread T0
+    #0 0x56246cf21a73 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40
+    #1 0x56246cf25b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f7899e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f7899e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x56246ce5e4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+Address 0x7fffc949a6e0 is located in stack of thread T0 at offset 2304 in frame
+    #0 0x56246cf1cebf in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:249
+
+  This frame has 16 object(s):
+    [32, 36) 'cipher.addr'
+    [48, 192) 'filestats' (line 250)
+    [256, 2304) 'file_extd_urls' (line 252) <== Memory access at offset 2304 overflows this variable
+    [2432, 2433) 'algo' (line 253)
+    [2448, 2449) 'ch' (line 254)
+    [2464, 2472) 'hdr_buf' (line 255)
+    [2496, 2499) 'version' (line 257)
+    [2512, 2513) 'file_opts' (line 258)
+    [2528, 2536) 'filesize' (line 260)
+    [2560, 2564) 'blk_cnt' (line 261)
+    [2576, 2580) 'file_extd_size' (line 261)
+    [2592, 2596) 'blksize' (line 261)
+    [2608, 2612) 'blksize_uncomp' (line 261)
+    [2624, 2628) 'magic' (line 262)
+    [2640, 2644) 'x' (line 265)
+    [2656, 2664) 'offset' (line 266)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40 in dact_process_file
+Shadow bytes around the buggy address:
+  0x10007928b480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007928b490: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007928b4a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007928b4b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007928b4c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x10007928b4d0: 00 00 00 00 00 00 00 00 00 00 00 00[f2]f2 f2 f2
+  0x10007928b4e0: f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 01 f2 01 f2
+  0x10007928b4f0: 00 f2 f2 f2 03 f2 01 f2 00 f2 f2 f2 04 f2 04 f2
+  0x10007928b500: 04 f2 04 f2 04 f2 04 f2 00 f3 f3 f3 00 00 00 00
+  0x10007928b510: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10007928b520: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104946==ABORTING
+input : id:000024,sig:06,src:000058,op:int32,pos:43,val:be:+16
+=================================================================
+==1104948==ERROR: AddressSanitizer: negative-size-param: (size=-1)
+    #0 0x55d9fb77f5d4 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55d9fb7be98c in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:626:5
+    #2 0x55d9fb7c4b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fd7e2429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x7fd7e2429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #5 0x55d9fb6fd4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000050 is located 0 bytes inside of 1-byte region [0x602000000050,0x602000000051)
+allocated by thread T0 here:
+    #0 0x55d9fb78030e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55d9fb7be92b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:624:12
+    #2 0x55d9fb7c4b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fd7e2429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: negative-size-param (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+==1104948==ABORTING
+input : id:000025,sig:06,src:000085,op:flip1,pos:27
+dact: read: No such file or directory
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104950==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000011 at pc 0x56412e7f96ea bp 0x7ffdf2375d00 sp 0x7ffdf23754d0
+WRITE of size 18 at 0x602000000011 thread T0
+    #0 0x56412e7f96e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56412e83b300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x56412e838a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x56412e838a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x56412e83eb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f2c83229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f2c83229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56412e7774c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000011 is located 0 bytes to the right of 1-byte region [0x602000000010,0x602000000011)
+allocated by thread T0 here:
+    #0 0x56412e7fa30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56412e83824b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x56412e83eb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f2c83229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa[01]fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104950==ABORTING
+input : id:000026,sig:11,src:000094,op:arith8,pos:28,val:+5
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104952==ERROR: AddressSanitizer: SEGV on unknown address 0x55adee8b4090 (pc 0x55ad9e36337b bp 0x7fffc559db80 sp 0x7fffc559cee0 T0)
+==1104952==The signal is caused by a READ memory access.
+    #0 0x55ad9e36337b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x55ad9e369b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f7241e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f7241e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55ad9e2a24c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104952==ABORTING
+input : id:000027,sig:06,src:000102,op:arith8,pos:51,val:+20
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104954==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x555d405d66ea bp 0x7ffe39fee4a0 sp 0x7ffe39fedc70
+WRITE of size 29 at 0x60200000001b thread T0
+    #0 0x555d405d66e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x555d40618300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x555d40615a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x555d40615a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x555d4061bb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7fb127a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fb127a29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x555d405544c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x555d405d730e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x555d4061524b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x555d4061bb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7fb127a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fd fd fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104954==ABORTING
+input : id:000028,sig:11,src:000132,op:flip1,pos:20
+=================================================================
+==1104956==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7ff32ecfe80b at pc 0x561c31c2d6ea bp 0x7ffd1b759f00 sp 0x7ffd1b7596d0
+WRITE of size 747621 at 0x7ff32ecfe80b thread T0
+    #0 0x561c31c2d6e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x561c31c6f300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x561c31c6ca07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x561c31c6ca07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x561c31c72b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7ff32f429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7ff32f429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x561c31bab4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7ff32ecfe80b is located 0 bytes to the right of 524299-byte region [0x7ff32ec7e800,0x7ff32ecfe80b)
+allocated by thread T0 here:
+    #0 0x561c31c2e30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x561c31c6c24b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x561c31c72b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7ff32f429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0ffee5d97cb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffee5d97cc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffee5d97cd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffee5d97ce0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ffee5d97cf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0ffee5d97d00: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffee5d97d10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffee5d97d20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffee5d97d30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffee5d97d40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0ffee5d97d50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104956==ABORTING
+input : id:000029,sig:11,src:000147,op:flip1,pos:20
+=================================================================
+==1104958==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7f1e5eefe80b at pc 0x561015e826ea bp 0x7ffe5b11c420 sp 0x7ffe5b11bbf0
+WRITE of size 747621 at 0x7f1e5eefe80b thread T0
+    #0 0x561015e826e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x561015ec4300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x561015ec1a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x561015ec1a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x561015ec7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f1e5f629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f1e5f629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x561015e004c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x7f1e5eefe80b is located 0 bytes to the right of 524299-byte region [0x7f1e5ee7e800,0x7f1e5eefe80b)
+allocated by thread T0 here:
+    #0 0x561015e8330e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x561015ec124b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x561015ec7b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f1e5f629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0fe44bdd7cb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe44bdd7cc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe44bdd7cd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe44bdd7ce0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0fe44bdd7cf0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0fe44bdd7d00: 00[03]fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe44bdd7d10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe44bdd7d20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe44bdd7d30: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe44bdd7d40: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0fe44bdd7d50: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104958==ABORTING
+input : id:000030,sig:11,src:000150,op:int16,pos:43,val:+1024
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104960==ERROR: AddressSanitizer: SEGV on unknown address 0x558b2c96c9b0 (pc 0x558a412e937b bp 0x7ffcc96a0780 sp 0x7ffcc969fae0 T0)
+==1104960==The signal is caused by a READ memory access.
+    #0 0x558a412e937b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x558a412efb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f5a2b829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f5a2b829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x558a412284c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104960==ABORTING
+input : id:000031,sig:11,src:000155,op:flip1,pos:26
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+=================================================================
+==1104962==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffdf42e5420 at pc 0x55d1b6667a74 bp 0x7ffdf42e4b10 sp 0x7ffdf42e4b08
+WRITE of size 8 at 0x7ffdf42e5420 thread T0
+    #0 0x55d1b6667a73 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40
+    #1 0x55d1b666bb01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f237ae29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f237ae29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55d1b65a44c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+Address 0x7ffdf42e5420 is located in stack of thread T0 at offset 2304 in frame
+    #0 0x55d1b6662ebf in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:249
+
+  This frame has 16 object(s):
+    [32, 36) 'cipher.addr'
+    [48, 192) 'filestats' (line 250)
+    [256, 2304) 'file_extd_urls' (line 252) <== Memory access at offset 2304 overflows this variable
+    [2432, 2433) 'algo' (line 253)
+    [2448, 2449) 'ch' (line 254)
+    [2464, 2472) 'hdr_buf' (line 255)
+    [2496, 2499) 'version' (line 257)
+    [2512, 2513) 'file_opts' (line 258)
+    [2528, 2536) 'filesize' (line 260)
+    [2560, 2564) 'blk_cnt' (line 261)
+    [2576, 2580) 'file_extd_size' (line 261)
+    [2592, 2596) 'blksize' (line 261)
+    [2608, 2612) 'blksize_uncomp' (line 261)
+    [2624, 2628) 'magic' (line 262)
+    [2640, 2644) 'x' (line 265)
+    [2656, 2664) 'offset' (line 266)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40 in dact_process_file
+Shadow bytes around the buggy address:
+  0x10003e854a30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854a40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854a50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854a60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854a70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x10003e854a80: 00 00 00 00[f2]f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2
+  0x10003e854a90: f2 f2 f2 f2 01 f2 01 f2 00 f2 f2 f2 03 f2 01 f2
+  0x10003e854aa0: 00 f2 f2 f2 04 f2 04 f2 04 f2 04 f2 04 f2 04 f2
+  0x10003e854ab0: 00 f3 f3 f3 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854ac0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10003e854ad0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104962==ABORTING
+input : id:000032,sig:06,src:000155,op:flip2,pos:26
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+=================================================================
+==1104964==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffc563fdee0 at pc 0x55d8bd64fa74 bp 0x7ffc563fd5d0 sp 0x7ffc563fd5c8
+WRITE of size 8 at 0x7ffc563fdee0 thread T0
+    #0 0x55d8bd64fa73 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40
+    #1 0x55d8bd653b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f825ba29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f825ba29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x55d8bd58c4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+Address 0x7ffc563fdee0 is located in stack of thread T0 at offset 2304 in frame
+    #0 0x55d8bd64aebf in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:249
+
+  This frame has 16 object(s):
+    [32, 36) 'cipher.addr'
+    [48, 192) 'filestats' (line 250)
+    [256, 2304) 'file_extd_urls' (line 252) <== Memory access at offset 2304 overflows this variable
+    [2432, 2433) 'algo' (line 253)
+    [2448, 2449) 'ch' (line 254)
+    [2464, 2472) 'hdr_buf' (line 255)
+    [2496, 2499) 'version' (line 257)
+    [2512, 2513) 'file_opts' (line 258)
+    [2528, 2536) 'filesize' (line 260)
+    [2560, 2564) 'blk_cnt' (line 261)
+    [2576, 2580) 'file_extd_size' (line 261)
+    [2592, 2596) 'blksize' (line 261)
+    [2608, 2612) 'blksize_uncomp' (line 261)
+    [2624, 2628) 'magic' (line 262)
+    [2640, 2644) 'x' (line 265)
+    [2656, 2664) 'offset' (line 266)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40 in dact_process_file
+Shadow bytes around the buggy address:
+  0x10000ac77b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10000ac77b90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10000ac77ba0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10000ac77bb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10000ac77bc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x10000ac77bd0: 00 00 00 00 00 00 00 00 00 00 00 00[f2]f2 f2 f2
+  0x10000ac77be0: f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 01 f2 01 f2
+  0x10000ac77bf0: 00 f2 f2 f2 03 f2 01 f2 00 f2 f2 f2 04 f2 04 f2
+  0x10000ac77c00: 04 f2 04 f2 04 f2 04 f2 00 f3 f3 f3 00 00 00 00
+  0x10000ac77c10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x10000ac77c20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104964==ABORTING
+input : id:000033,sig:06,src:000159,op:arith8,pos:51,val:+20
+dact: Decompression resulted in 0-byte block.
+=================================================================
+==1104966==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000001b at pc 0x55a7ac6a16ea bp 0x7ffe82689940 sp 0x7ffe82689110
+WRITE of size 29 at 0x60200000001b thread T0
+    #0 0x55a7ac6a16e9 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55a7ac6e3300 in comp_plain_algo /home/dmskhs0912/afl_project/dact-0.8.42/comp_plain.c
+    #2 0x55a7ac6e0a07 in dact_blk_decompress /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:176:9
+    #3 0x55a7ac6e0a07 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:658:20
+    #4 0x55a7ac6e6b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #5 0x7f239b429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f239b429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55a7ac61f4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x60200000001b is located 0 bytes to the right of 11-byte region [0x602000000010,0x60200000001b)
+allocated by thread T0 here:
+    #0 0x55a7ac6a230e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x55a7ac6e024b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:581:17
+    #2 0x55a7ac6e6b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f239b429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa86e9) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00[03]fa fa fd fd fa fa fa fa fa fa fa fa
+  0x0c047fff8010: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104966==ABORTING
+input : id:000034,sig:06,src:000155,op:havoc,rep:4
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+dact: read: No such file or directory
+=================================================================
+==1104968==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ffc27a94b80 at pc 0x5599e5d42a74 bp 0x7ffc27a94270 sp 0x7ffc27a94268
+WRITE of size 8 at 0x7ffc27a94b80 thread T0
+    #0 0x5599e5d42a73 in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40
+    #1 0x5599e5d46b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7ff78e829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7ff78e829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x5599e5c7f4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+Address 0x7ffc27a94b80 is located in stack of thread T0 at offset 2304 in frame
+    #0 0x5599e5d3debf in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:249
+
+  This frame has 16 object(s):
+    [32, 36) 'cipher.addr'
+    [48, 192) 'filestats' (line 250)
+    [256, 2304) 'file_extd_urls' (line 252) <== Memory access at offset 2304 overflows this variable
+    [2432, 2433) 'algo' (line 253)
+    [2448, 2449) 'ch' (line 254)
+    [2464, 2472) 'hdr_buf' (line 255)
+    [2496, 2499) 'version' (line 257)
+    [2512, 2513) 'file_opts' (line 258)
+    [2528, 2536) 'filesize' (line 260)
+    [2560, 2564) 'blk_cnt' (line 261)
+    [2576, 2580) 'file_extd_size' (line 261)
+    [2592, 2596) 'blksize' (line 261)
+    [2608, 2612) 'blksize_uncomp' (line 261)
+    [2624, 2628) 'magic' (line 262)
+    [2640, 2644) 'x' (line 265)
+    [2656, 2664) 'offset' (line 266)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:478:40 in dact_process_file
+Shadow bytes around the buggy address:
+  0x100004f4a920: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a930: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a940: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a950: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a960: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x100004f4a970:[f2]f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2
+  0x100004f4a980: 01 f2 01 f2 00 f2 f2 f2 03 f2 01 f2 00 f2 f2 f2
+  0x100004f4a990: 04 f2 04 f2 04 f2 04 f2 04 f2 04 f2 00 f3 f3 f3
+  0x100004f4a9a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a9b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100004f4a9c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1104968==ABORTING
+input : id:000035,sig:11,src:000051,op:arith8,pos:28,val:+5
+dact: read: No such file or directory
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1104970==ERROR: AddressSanitizer: SEGV on unknown address 0x55a09f60b420 (pc 0x559f2bb8337b bp 0x7ffd4f673500 sp 0x7ffd4f672860 T0)
+==1104970==The signal is caused by a READ memory access.
+    #0 0x559f2bb8337b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4
+    #1 0x559f2bb89b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #2 0x7f8dbee29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #3 0x7f8dbee29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #4 0x559f2bac24c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:592:4 in dact_process_file
+==1104970==ABORTING
+input : id:000036,sig:06,src:000201,op:arith8,pos:20,val:+35
+dact: read: No such file or directory
+=================================================================
+==1104972==ERROR: AddressSanitizer: negative-size-param: (size=-1)
+    #0 0x5617a4bbc5d4 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5617a4bfb98c in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:626:5
+    #2 0x5617a4c01b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f2a72c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x7f2a72c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #5 0x5617a4b3a4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x602000000050 is located 0 bytes inside of 1-byte region [0x602000000050,0x602000000051)
+allocated by thread T0 here:
+    #0 0x5617a4bbd30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x5617a4bfb92b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:624:12
+    #2 0x5617a4c01b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f2a72c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: negative-size-param (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+==1104972==ABORTING
+input : id:000037,sig:06,src:000201,op:havoc,rep:4
+=================================================================
+==1104974==ERROR: AddressSanitizer: negative-size-param: (size=-1)
+    #0 0x56269e0ef5d4 in __asan_memcpy (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56269e12e98c in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:626:5
+    #2 0x56269e134b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f0d2ac29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x7f0d2ac29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #5 0x56269e06d4c4 in _start (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0x264c4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+
+0x631000000800 is located 0 bytes inside of 65536-byte region [0x631000000800,0x631000010800)
+allocated by thread T0 here:
+    #0 0x56269e0f030e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x56269e12e92b in dact_process_file /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:624:12
+    #2 0x56269e134b01 in main /home/dmskhs0912/afl_project/dact-0.8.42/dact.c:689:8
+    #3 0x7f0d2ac29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: negative-size-param (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa85d4) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6) in __asan_memcpy
+==1104974==ABORTING
+input : san.sh
+
+=================================================================
+==1104976==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 1024 byte(s) in 2 object(s) allocated from:
+    #0 0x562f8edba30e in __interceptor_malloc (/home/dmskhs0912/afl_project/dacttest/dact_ASAN+0xa930e) (BuildId: 6e92cce7428e7e633c8f61eece0ec834a2ddf6e6)
+    #1 0x562f8edf579a in dact_config_loadfile /home/dmskhs0912/afl_project/dact-0.8.42/dact_common.c:156:7
+    #2 0x7f5bb7e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: 1024 byte(s) leaked in 2 allocation(s).

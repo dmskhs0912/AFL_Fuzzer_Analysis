@@ -1,0 +1,35 @@
+                        DYNAMIC ADAPTIVE COMPRESSION TOOL
+                                 DACT 0.8.42
+
+Release information:
+  pkg:  DACT version 0.8.42
+  url:  http://www.rkeene.org/files/oss/dact/dact-0.8.42.tar.gz
+  web:  http://www.rkeene.org/oss/dact/
+  date: Mon May 31 23:32:43 CDT 2010
+--------------------------------------------------------------------------
+
+Finish writing dact.conf options handlers
+
+a. Archive
+b. Pre/Post Install script
+
+# x. Darwin:  Does not set file permissions (fixed)
+y. Does not handle large files
+z. Does not store original file permissions.
+
+i. auto-upgrade for modules
+ii. fix modules everywhere
+iii. sign modules
+iv. default to modules
+v. module version stuff
+vi. commercial modules
+
+1. Get more compression algorithms
+2. factor
+3. --> lha (not GPL)
+4. --> arj (not GPL)
+5. --> rar (not GPL, shareware)
+6. lzw 
+7. Document code.
+...
+n. Write better documentation.

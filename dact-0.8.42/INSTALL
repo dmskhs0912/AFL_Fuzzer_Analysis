@@ -1,0 +1,18 @@
+                        DYNAMIC ADAPTIVE COMPRESSION TOOL
+                                 DACT 0.8.42
+
+Release information:
+  pkg:  DACT version 0.8.42
+  url:  http://www.rkeene.org/files/oss/dact/dact-0.8.42.tar.gz
+  web:  http://www.rkeene.org/oss/dact/
+  date: Mon May 31 23:32:43 CDT 2010
+--------------------------------------------------------------------------
+
+DACT Installation Guide
+
+$ ./configure
+$ make
+$ su
+$ make install
+   (note, the default installation location is /usr/local,
+    make sure you have proper privileges to write there.)
