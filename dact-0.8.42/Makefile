@@ -1,17 +1,17 @@
-CC = clang -fsanitize=address
-CFLAGS = -g -O2 -Wall -DHAVE_CONFIG_H
+CC = gcc
+CFLAGS = -g -O2 -Wall -DHAVE_CONFIG_H -fno-stack-protector -mpreferred-stack-boundary=4 -z execstack
 CPPFLAGS = 
 
 EXEEXT = 
 OBJEXT = o
 PATH_SEPARATOR = :
 
-LD = clang -fsanitize=address
+LD = gcc
 AR = ar
 RANLIB = ranlib
 LOADLIBES = 
 LDLIBS +=  -lz  -lm # 
-LDFLAGS += 
+LDFLAGS += -z execstack 
 
 SHOBJFLAGS = -fPIC -DPIC
 SHOBJLDFLAGS = -shared -rdynamic
