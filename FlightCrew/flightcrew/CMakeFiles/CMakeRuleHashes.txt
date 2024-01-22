@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+fda4b94e5abedc98c5b9d120bbf721a3 src/FlightCrew-gui/CMakeFiles/copyfiles
+364d602147e3686c2b757a9e546e72c2 src/FlightCrew-gui/CMakeFiles/flightcrew-gui_autogen
+5ef72287f4fd7026888dfa969eb3fda0 src/FlightCrew-gui/CMakeFiles/makeinstaller
+b65ba2c8fca282858ee5ab6094b9bb72 src/FlightCrew-gui/ui_Form.h
+57378fa758b9d8e6452cff07e8d3157c src/FlightCrew/CMakeFiles/gccPCH_fc
+9ed004e952a121d3696689590850a4cf src/FlightCrew/stdafx.h.gch
+9f713ec357830076c6eddd993a608c1d src/FlightCrew/tests/CMakeFiles/copy_test_data
+0c55f312f389be3ac96ef34a51da9f02 src/FlightCrew/tests/CMakeFiles/gccPCH_tests
+1a568abb156d329b4cce3d0b6deb41bd src/FlightCrew/tests/stdafx_tests.h.gch

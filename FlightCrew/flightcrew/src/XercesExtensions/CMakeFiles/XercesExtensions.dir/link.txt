@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libXercesExtensions.a CMakeFiles/XercesExtensions.dir/FromXercesStringConverter.cpp.o CMakeFiles/XercesExtensions.dir/LocationAwareDOMParser.cpp.o CMakeFiles/XercesExtensions.dir/LocationInfoDataHandler.cpp.o CMakeFiles/XercesExtensions.dir/ToXercesStringConverter.cpp.o CMakeFiles/XercesExtensions.dir/XercesInit.cpp.o CMakeFiles/XercesExtensions.dir/XmlUtils.cpp.o
+/usr/bin/ranlib ../../lib/libXercesExtensions.a

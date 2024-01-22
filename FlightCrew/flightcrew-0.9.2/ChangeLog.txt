@@ -1,0 +1,39 @@
+FlightCrew pre-v0.9.2
+  - update for more precise error offset interface
+  - Build Windows binary with MinGW to remove VC++ dependencies
+
+FlightCrew v0.9.1
+  - Plugin support for autostart and autoclose has been added as well as restricting to epub2
+
+FligthCrew v0.9.0 
+    - The standalone Flightcrew code has been updated from Sigil source and converted to a plugin for Sigil 0.8.X and later
+
+FlightCrew v0.7.2 2011.08.15
+    - Use Inno for Windows installer.
+    - Add version display to GUI and CLI.
+    - Fix Sigil issue #813: erroneous Resource is reachable but not present in OPF detection.
+    - OS X minimum version bumped to 10.6.
+    - made the CSS resource use detection far more robust
+    - fixed an issue with CSS @import rules in the '@import "something.css"' format not being 
+    recognized
+    - fixed an issue with links to fonts in commented-out CSS producing "not in manifest" errors
+    (issue #15)
+    - fixed an issue with "background" and "background-image" CSS rules that referenced images
+    having those same images marked as unreachable files (issue #21)
+    - fixed an issue with "src" declarations in @font-face rules that have a space before the colon
+    throwing error messages about unreachable files (issue #21)
+    - clarified what "reachable" means in the error messages 
+
+FlightCrew v0.7.1 2010.11.11.
+    - added an automatic update checker to the GUI app
+    - the GUI now displays a "No problems found" message when the epub passes all checks 
+    (issue #9)
+    - fixed an issue with missing XHTML files causing the GUI to show a dialog about an 
+    std::exception and the CLI to report that the epub itself was not present (issue #8)
+    - fixed an issue that was causing empty error messages for incorrect uses of XML encodings
+    (issue #5)    
+    - fixed an issue with anchor links to the current file (links with fragments only)
+    incorrectly throwing errors in the reachability analysis (issue #3)
+
+FlightCrew v0.7.0 2010.10.01.
+    - initial release
