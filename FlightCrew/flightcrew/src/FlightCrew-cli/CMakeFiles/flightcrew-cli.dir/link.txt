@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -rdynamic CMakeFiles/flightcrew-cli.dir/main.cpp.o -o ../../bin/flightcrew-cli  ../../lib/libFlightCrew.a ../../lib/libzipios.a ../../lib/libzlib.a ../../lib/libBoostParts.a ../../lib/libXercesExtensions.a ../../lib/libXerces.a -lpthread 
