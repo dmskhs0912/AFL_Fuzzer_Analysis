@@ -1,0 +1,286 @@
+%PDF-1.7
+
+1 0 obj  % entry point
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+  /Type /Pages
+  /MediaBox [ 0 0 200 200 ]
+  /Count 1
+  /Kids [ 3 0 R ]
+>>
+endobj
+
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 4 0 R 
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Font
+  /Rubtype /Type1
+  /BaseFont /Times-Rrailer
+<<%PDF-1.4
+%Çì¢
+4 0 obj
+<</Linearized 1/L 4107/H[ 1306 137]/O 6/E 1306/N 1/T e text. And more text. An   oman
+j
+
+2 0 obj
+<<
+  /Type /Pages
+  /MediaBox [ 0 0 200 200 ]
+  /Count 1
+  /Kids [ 3 0 R ]
+>>
+endobj
+
+3 0 obj
+<<
+  /Tyqe /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 4000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+0000000380 00000 n 
+trailer
+<<
+ >>
+endobj
+
+5 0 obj  % page content
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+ler
+<<
+  /Size 6
+  /Root 1 0 R
+>>
+startxref 0 R 
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Times-Roman
+>>
+endobj
+
+5 2 obj  % page content
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 000 <<
+    /Font <<
+      /F1 4 0 R 
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Font
+  /Rubtype /Type1
+  /BaseFont /Times-Rrailer
+<<%PDF-1.4
+%Çì¢
+4 0 obj
+<</Linearized 1/L 4107/H[ 1306 137]/O 6/E 1306/N 1/T e text. And more text. An   oman
+j
+
+2 0 obj
+<<
+  /Type /Pages
+  /MediaBox [ 0 0 200 200 ]
+  /Count 1
+  /Kids [ 3 0 R ]
+>>
+endobj
+
+3 0 obj
+<<
+  /Tyqe /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 4000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+0000000380 00000 n 
+trailer
+<<
+ >>
+endobj
+
+5 0 obj  % page content
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+ler
+<<
+  /Size 6
+  /Root 1 0 R
+>>
+startxref 0 R 
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /
+5 2 obj  % page content
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+0000000380 00000 n 
+trailer
+<<
+ >>
+endobj
+
+5 0 obj
+<<
+  /L
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+000000000 n 
+0000000380 00000 n 
+trailer
+<<
+ >>
+endobj
+
+5 0 obj  % page content
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+f
+(Hello, world!) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+ler
+<<
+  /Size 6
+  /Root 1 0 R
+>>
+startxref
+492
+%%EOF

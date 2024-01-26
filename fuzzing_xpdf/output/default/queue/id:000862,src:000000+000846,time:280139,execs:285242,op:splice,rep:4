@@ -1,0 +1,74 @@
+%PDd-1.7
+
+1 0 obj  % entry point
+<<
+  /Type /Ctalog
+  /Pages 2 0 R
+>>
+endobj6T0 0 obj
+<<
+  /Type /Pages
+  /MediaBox [ 0 0 200 200 ]
+  /Count 1
+  /Kids [ 3 0 R ]
+>>
+endobj
+
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <<
+      /F1 4 0 R 
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Times-Roman
+>>
+endobj
+
+5 0 obj  % page conteët
+<<
+  /Length 44
+>>
+stream
+BT
+70 50 TD
+/F1 12 Tf
+(Hello, world!) %PDF-1.7
+
+1 0 ob /Subtypej  % e«try point
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+etrailer
+<<
+  /Size 6
+  /Root 1  Tj
+ET
+BT
+/F1 ndobj
+
+2 0ent 2 0 R
+  /Resources << obj
+<<
+  /Type /Pages
+  /MediaBox [ 0 0 200 200 ]
+  /Count 1
+  /Kids []
+>>
+endobj≠7ÉΩ,öm%ñùAP’@Sè¨¢M¢P;Éyr≈#ƒÄ»—
+
+3 0 obj
+<<
+  /Type /Page
+  /Paren
