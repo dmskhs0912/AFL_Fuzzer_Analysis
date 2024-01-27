@@ -27,7 +27,7 @@ Fuzzing Xpdf-3.02 (From Fuzzing101 - Exercise1)
     Usage: pdftotext [options] <PDF-file> [<text-file>]
 이므로 @@(입력 파일) 뒤에 출력될 텍스트 파일의 위치를 ./output으로 잡아주었다. 
 
-![Result](./xpdf_result.png)
+![Result](./images/xpdf_result.png)
 
 약 26분간 퍼징한 결과 2개의 saved crash가 발생했다. 여기서 saved crash는 AFL의 unique crash와 같은 개념이다. 
 ```
