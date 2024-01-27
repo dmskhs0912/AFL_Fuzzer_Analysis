@@ -1,0 +1,8 @@
+Error: PDF file is damaged - attempting to reconstruct xref table...
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==24674==ERROR: AddressSanitizer: stack-overflow on address 0x7fffa84c9ff8 (pc 0x5621d21091c5 bp 0x7f639eac5000 sp 0x7fffa84ca000 T0)
+    <empty stack>
+
+SUMMARY: AddressSanitizer: stack-overflow
+==24674==ABORTING
