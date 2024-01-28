@@ -724,6 +724,190 @@ SUMMARY: AddressSanitizer: stack-overflow stdio-common/./stdio-common/vfprintf-i
 ==24702==ABORTING
 </details>
 
+
 위의 결과로부터 두 크래시는 stack-overflow를 발생하고 있음을 알 수 있다. stack-overflow는 주로 함수의 무한 재귀로부터 발생하는데, 로그를 보면 Parser 클래스의 getObj 함수가 다수 호출되는 것을 볼 수 있다. 디버깅을 통해 실제로 Parser.cc의 Parser::getObj에서 무한 재귀가 발생하는지 확인해보자.
 
-## Debug
+## Debug pdftotext
+pdftotext_fuzz는 instrumentation을 포함해 빌드한 pdftotext이다.
+```bash
+~/project/fuzzing_xpdf$ gdb pdftotext_fuzz
+(gdb) b Parser::getObj(...)
+(gdb) r ./output/default/crashes/crash1 ./output/
+(gdb) python
+> for _ in range(100000) :
+>  gdb.execute("continue")
+... 내용 출력 ...
+(gdb) backtrace
+... 내용 출력 ...
+```
+Parser::getObj()에 중단점을 설정하고 python 스크립팅을 통해 10만번 continue를 진행한 후 함수 호출 스택 확인을 위해 backtrace를 실행했다. 
+
+그 결과 Parser::getObj, Parser::makeStream, Object::dictLookup, XRef::fetch가 재귀적으로 스택에 쌓이는 것을 확인할 수 있었다. 아래는 backtrace 출력 결과 중 일부이다.
+![Backtrace](./images/xpdf_backtrace.png)
+
+중단점을 제거하고 프로그램을 실행한 후 backtrace를 한 결과 역시 위 4개의 함수가 재귀적으로 호출되다 Segmentation Fault가 발생하는 것을 확인할 수 있었다. Parser::getObj의 코드를 분석해 무한 재귀를 일으키는 부분을 확인해보자.
+
+## Analyze the codes
+* Parser.cc
+```c++
+Object *Parser::getObj(Object *obj, Guchar *fileKey, CryptAlgorithm encAlgorithm, int keyLength, int objNum, int objGen) {
+    ...
+    if (allowStreams && buf2.isCmd("stream")) {
+      if ((str = makeStream(obj, fileKey, encAlgorithm, keyLength, objNum,objGen))) {...}
+    ...
+    }
+}
+
+Stream *Parser::makeStream(Object *dict, Guchar *fileKey, CryptAlgorithm encAlgorithm, int keyLength, int objNum, int objGen) {
+    ...
+    dict->dictLookup("Length", &obj);
+    ...
+}
+```
+
+* Object.h
+```c++
+inline Object *Object::dictLookup(char *key, Object *obj)
+  { return dict->lookup(key, obj); }
+```
+
+* Dict.cc
+```c++
+Object *Dict::lookup(char *key, Object *obj) {
+  DictEntry *e;
+
+  return (e = find(key)) ? e->val.fetch(xref, obj) : obj->initNull();
+}
+```
+
+* Object.cc
+```c++
+Object *Object::fetch(XRef *xref, Object *obj) {
+  return (type == objRef && xref) ? xref->fetch(ref.num, ref.gen, obj) : copy(obj);
+}
+```
+
+* XRef.cc
+```c++
+Object *XRef::fetch(int num, int gen, Object *obj) {
+  XRefEntry *e;
+  Parser *parser;
+  Object obj1, obj2, obj3;
+  
+  ...
+
+  e = &entries[num];
+  switch (e->type) {
+
+  case xrefEntryUncompressed:
+    if (e->gen != gen) {
+      goto err;
+    }
+    obj1.initNull();
+    parser = new Parser(this, new Lexer(this, str->makeSubStream(start + e->offset, gFalse, 0, &obj1)), gTrue);
+    parser->getObj(&obj1); 
+    parser->getObj(&obj2);
+    parser->getObj(&obj3);
+    if (!obj1.isInt() || obj1.getInt() != num ||
+	!obj2.isInt() || obj2.getInt() != gen ||
+	!obj3.isCmd("obj")) {
+      obj1.free();
+      obj2.free();
+      obj3.free();
+      delete parser;
+      goto err;
+    }
+    parser->getObj(obj, encrypted ? fileKey : (Guchar *)NULL, encAlgorithm, keyLength, num, gen); 
+
+    ...
+
+    }
+
+    ...
+}
+```
+
+위는 디버깅 결과 호출 스택에 쌓이게 되는 함수들 관련 코드이다. Parser::getObj -> Parser::makeStream -> Object::dictLookup -> XRef::fetch -> Parser::getObj 순으로 호출되고 있다. XRef::fetch의 parser가 Parser::makeStream을 호출하도록 하는 조건을 계속해서 충족하기 때문에 무한 재귀가 발생하는 것 같다. 더 자세히 코드를 분석해보자. 
+
+Parser::getObj는 입력 스트림에서 다음 오브젝트를 파싱해 가져오는 함수이다. 다음 두 입력 토큰이 Object 객체 buf1, buf2에 저장되는데, 이 때 buf1의 cmd가 "<<", allowStreams가 true이고, buf2의 cmd가 "stream"인 경우 makeStream 함수가 호출된다. XRef::fetch에서 parser를 생성할 때 allowStreams를 항상 true로 초기화하기 때문에 buf1, buf2에 대한 조건만 충족하도록 계속해서 parser가 생성된다면 무한 재귀가 발생한다. 추가적인 디버깅을 통해 크래시로부터 어떻게 무한 재귀가 발생하는지 자세히 살펴보자.
+
+## Additional Debugging
+XRef::fetch에서 parser를 생성하는 부분에 중단점을 걸고 buf1, buf2의 cmd 값을 살펴본다. 
+```bash
+pwndbg> p parser->buf1
+$19 = {
+  type = objCmd,
+  {
+    booln = 1435803120,
+    intg = 1435803120,
+    real = 4.6355707434632157e-310,
+    string = 0x555555949df0,
+    name = 0x555555949df0 "<<",
+    array = 0x555555949df0,
+    dict = 0x555555949df0,
+    stream = 0x555555949df0,
+    ref = {
+      num = 1435803120,
+      gen = 21845
+    },
+    cmd = 0x555555949df0 "<<"
+  }
+}
+pwndbg> p parser->buf2
+$20 = {
+  type = objName,
+  {
+    booln = 1435803088,
+    intg = 1435803088,
+    real = 4.6355707434616347e-310,
+    string = 0x555555949dd0,
+    name = 0x555555949dd0 "Length",
+    array = 0x555555949dd0,
+    dict = 0x555555949dd0,
+    stream = 0x555555949dd0,
+    ref = {
+      num = 1435803088,
+      gen = 21845
+    },
+    cmd = 0x555555949dd0 "Length"
+  }
+}
+```
+buf1의 cmd는 "<<"이지만 buf2는 일단 type이 cmd도 아니고, 내용이 Length에 해당한다. Parser::getObj의 코드를 다시 살펴보자.
+```c++
+  // dictionary or stream
+  } else if (buf1.isCmd("<<")) {        
+    shift();
+    obj->initDict(xref);
+    while (!buf1.isCmd(">>") && !buf1.isEOF()) {
+      if (!buf1.isName()) {
+	error(getPos(), "Dictionary key must be a name object");
+	shift();            // [1]
+      } else {
+	key = copyString(buf1.getName());       // [2]
+	shift();
+	if (buf1.isEOF() || buf1.isError()) {
+	  gfree(key);
+	  break;
+	}
+	obj->dictAdd(key, getObj(&obj2, fileKey, encAlgorithm, keyLength,
+				 objNum, objGen)); 
+      }
+    }
+    if (buf1.isEOF())
+      error(getPos(), "End of file inside dictionary");
+    // stream objects are not allowed inside content streams or
+    // object streams
+    if (allowStreams && buf2.isCmd("stream")) {
+      if ((str = makeStream(obj, fileKey, encAlgorithm, keyLength,
+			    objNum, objGen))) { 
+```
+"<<"와 ">>" 사이의 내용을 탐색하고[1] 가져와서[2], 딕셔너리의 내용으로 추가하고있다.[3] crash1 파일의 내용을 살펴보자.
+```bash
+$ cat crash1
+...
+<</Length 7 0 R/Filter /FlateDecode>>
+stream
+...
+```
+"<<" 이후에 "Length"가 나오는 부분을 찾아왔다. key를 "Length"로 하고 value를 참조 값 7 0 으로 하는 딕셔너리가 obj에 추가된다. 이후 내용을 ">>"까지 처리 후 stream이 등장하므로 makeStream 함수가 호출된다. makeStream 함수에서 dickLookup("Length", &obj)를 호출하는데, 딕셔너리 오브젝트 obj에서 key가 Length인 value를 찾는다. 문제는, 이 value가 참조 값 7 0이고, XRef::fetch의 인자 xref도 같은 참조 테이블을 가리키고 있다. 따라서 Parser::getObj가 무한 재귀하게 된다. 
