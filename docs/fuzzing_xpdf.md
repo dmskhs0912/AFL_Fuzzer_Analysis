@@ -906,8 +906,46 @@ buf1의 cmd는 "<<"이지만 buf2는 일단 type이 cmd도 아니고, 내용이 
 ```bash
 $ cat crash1
 ...
+7 0 obj
 <</Length 7 0 R/Filter /FlateDecode>>
 stream
 ...
 ```
 "<<" 이후에 "Length"가 나오는 부분을 찾아왔다. key를 "Length"로 하고 value를 참조 값 7 0 으로 하는 딕셔너리가 obj에 추가된다. 이후 내용을 ">>"까지 처리 후 stream이 등장하므로 makeStream 함수가 호출된다. makeStream 함수에서 dickLookup("Length", &obj)를 호출하는데, 딕셔너리 오브젝트 obj에서 key가 Length인 value를 찾는다. 문제는, 이 value가 참조 값 7 0이고, XRef::fetch의 인자 xref도 같은 참조 테이블을 가리키고 있다. 따라서 Parser::getObj가 무한 재귀하게 된다. 
+
+## Fix the issue
+이 취약점은 순환 참조를 감지하지 않고 데이터를 처리하기 때문에 무한 재귀가 발생했다. 따라서 순환 참조 감지 코드를 추가하면 취약점을 제거할 수 있다. Xpdf의 최신 릴리즈 4.04 버전에서 어떻게 코드를 수정했는지 살펴보자. 
+```bash
+$ wget https://dl.xpdfreader.com/xpdf-4.04.tar.gz
+$ tar -xvzf xpdf-4.04.tar.gz
+```
+* Parser::getObj
+```c++
+...
+
+if (!simpleOnly && recursion < recursionLimit && buf1.isCmd("[")) {
+    shift();
+    obj->initArray(xref);
+    while (!buf1.isCmd("]") && !buf1.isEOF())
+      obj->arrayAdd(getObj(&obj2, gFalse, fileKey, encAlgorithm, keyLength,
+                           objNum, objGen, recursion + 1));
+    if (buf1.isEOF())
+      error(errSyntaxError, getPos(), "End of file inside array");
+    shift();
+
+  // dictionary or stream
+  } else if (!simpleOnly && recursion < recursionLimit && buf1.isCmd("<<")) {
+
+...
+```
+우선, Parser::getObj, Parser::makeStream, Object::dictLookup, XRef::fetch등 함수의 인자에 int recursion을 추가해 재귀 호출의 깊이를 저장하고 있다. 오브젝트를 처리할 때 recursion이 정해진 recursionLimit(=500)을 넘는지 확인해 무한 재귀를 원초적으로 방지한다. 
+* Parser::makeStream
+```c++
+// check for length in damaged file
+  if (xref && xref->getStreamEnd(pos, &endPos)) {
+    length = endPos - pos;
+    haveLength = gTrue;
+```
+Parser::makeStream에서도 손상된 파일에 대해 Length를 딕셔너리에서 fetch해오지 않고 직접 계산함으로써 코드의 안정성을 더하고 있다. 
+
+------------------------------
