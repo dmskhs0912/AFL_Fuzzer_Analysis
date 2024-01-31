@@ -148,3 +148,22 @@ $ ~/project/fuzzing_libexif/exif_asan ~/project/fuzzing_libexif/targetcrash
 exif-utils.c의 exif_get_slong에서 heap-based buffer overflow가 발생했음을 확인할 수 있다. 
 
 ## Triage
+* exif_get_slong
+```C
+ExifSLong
+exif_get_slong (const unsigned char *b, ExifByteOrder order)
+{
+	if (!b) return 0;
+        switch (order) {
+        case EXIF_BYTE_ORDER_MOTOROLA:
+                return ((b[0] << 24) | (b[1] << 16) | (b[2] << 8) | b[3]);
+        case EXIF_BYTE_ORDER_INTEL:
+                return ((b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0]);
+        }
+
+	/* Won't be reached */
+	return (0);
+}
+```
+
+힙 기반 버퍼 오버플로우가 발생한 위 함수는 4바이트 배열 b를 주어진 바이트 배열 순서대로 재배치해 리턴하는 함수이다. 인자로 주어진 order가 EXIF_BYTE_ORDER_MOTOROLA인 경우 b를 빅 엔디안 형식으로 배열해 리턴하고, EXIF_BYTE_ORDER_INTEL인 경우 리틀 엔디안 형식으로 배열해 리턴한다. 여기서 만약 배열 b의 크기가 4바이트보다 작은 경우 다른 메모리 영역을 침범할 수 있다. 디버깅을 통해 자세히 살펴보자. 
