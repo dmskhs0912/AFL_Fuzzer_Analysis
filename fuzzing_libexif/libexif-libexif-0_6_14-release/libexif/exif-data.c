@@ -184,7 +184,8 @@ exif_data_load_data_entry (ExifData *data, ExifEntry *entry,
 		return 0;
 	if (size < doff + s)
 		return 0;
-
+	if (4294967295 / exif_format_get_size(entry->format) < entry->components)
+        	return 0;
 	entry->data = exif_data_alloc (data, s);
 	if (entry->data) {
 		entry->size = s;
