@@ -1,0 +1,6 @@
+./tcpdump_fuzz
+-vvvvXX
+-ee
+-nn
+-r
+@@

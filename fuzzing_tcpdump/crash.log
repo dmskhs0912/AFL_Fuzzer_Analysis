@@ -1,0 +1,629 @@
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000000,sig:11,src:000612,time:851,execs:3956,op:havoc,rep:3
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000000,sig:11,src:000612,time:851,execs:3956,op:havoc,rep:3, link-type BLUETOOTH_LE_LL_WITH_PHDR (Bluetooth Low Energy air interface with pseudo-header)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153755==ERROR: AddressSanitizer: SEGV on unknown address 0x563271bea4f8 (pc 0x563211fcd4df bp 0x7ffef6b69770 sp 0x7ffef6b694a0 T0)
+==153755==The signal is caused by a READ memory access.
+    #0 0x563211fcd4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x563211fcd4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x563211fb18a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x563211fb18a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f026c829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f026c829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x563211ee8994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153755==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000001,sig:11,src:000612,time:2569,execs:5130,op:havoc,rep:7
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000001,sig:11,src:000612,time:2569,execs:5130,op:havoc,rep:7, link-type NULL (BSD loopback)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153757==ERROR: AddressSanitizer: SEGV on unknown address 0x55ecc269bb68 (pc 0x55ec42ce24df bp 0x7ffff584caf0 sp 0x7ffff584c820 T0)
+==153757==The signal is caused by a READ memory access.
+    #0 0x55ec42ce24df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55ec42ce24df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55ec42cc68a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55ec42cc68a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f7348c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f7348c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55ec42bfd994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153757==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000002,sig:11,src:000612,time:18466,execs:16012,op:havoc,rep:6
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000002,sig:11,src:000612,time:18466,execs:16012,op:havoc,rep:6, link-type EN10MB (Ethernet)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153759==ERROR: AddressSanitizer: SEGV on unknown address 0x558d6fd6a340 (pc 0x558d1784c4df bp 0x7ffebb3709b0 sp 0x7ffebb3706e0 T0)
+==153759==The signal is caused by a READ memory access.
+    #0 0x558d1784c4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x558d1784c4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x558d178308a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x558d178308a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fd088c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fd088c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x558d17767994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153759==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000003,sig:11,src:000797,time:19777,execs:16905,op:havoc,rep:3
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000003,sig:11,src:000797,time:19777,execs:16905,op:havoc,rep:3, link-type EN10MB (Ethernet)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153761==ERROR: AddressSanitizer: SEGV on unknown address 0x55aea28e4730 (pc 0x55ae23a834df bp 0x7fffefd8a930 sp 0x7fffefd8a660 T0)
+==153761==The signal is caused by a READ memory access.
+    #0 0x55ae23a834df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55ae23a834df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55ae23a678a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55ae23a678a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7ff467429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7ff467429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55ae2399e994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153761==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000004,sig:11,src:000799,time:23754,execs:19587,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000004,sig:11,src:000799,time:23754,execs:19587,op:havoc,rep:2, link-type SYMANTEC_FIREWALL (Symantec Firewall)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153763==ERROR: AddressSanitizer: SEGV on unknown address 0x561fec4171fc (pc 0x561fae77d4df bp 0x7ffde6f4ff90 sp 0x7ffde6f4fcc0 T0)
+==153763==The signal is caused by a READ memory access.
+    #0 0x561fae77d4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x561fae77d4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x561fae7618a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x561fae7618a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f4581229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f4581229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x561fae698994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153763==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000005,sig:11,src:000799,time:26365,execs:21353,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000005,sig:11,src:000799,time:26365,execs:21353,op:havoc,rep:2, link-type NETANALYZER (Ethernet with Hilscher netANALYZER pseudo-header)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153765==ERROR: AddressSanitizer: SEGV on unknown address 0x563a845c0cc8 (pc 0x563a7acf64df bp 0x7ffc450d55f0 sp 0x7ffc450d5320 T0)
+==153765==The signal is caused by a READ memory access.
+    #0 0x563a7acf64df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x563a7acf64df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x563a7acda8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x563a7acda8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f5245229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f5245229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x563a7ac11994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153765==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000006,sig:11,src:000799,time:28591,execs:22861,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000006,sig:11,src:000799,time:28591,execs:22861,op:havoc,rep:2, link-type SLIP (SLIP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153767==ERROR: AddressSanitizer: SEGV on unknown address 0x55aa9aa2bd0c (pc 0x55aa7fa364df bp 0x7ffcd0a2d810 sp 0x7ffcd0a2d540 T0)
+==153767==The signal is caused by a READ memory access.
+    #0 0x55aa7fa364df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55aa7fa364df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55aa7fa1a8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55aa7fa1a8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fcff5429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fcff5429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55aa7f951994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153767==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000007,sig:11,src:000799,time:30040,execs:23841,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000007,sig:11,src:000799,time:30040,execs:23841,op:havoc,rep:2, link-type FDDI (FDDI)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153769==ERROR: AddressSanitizer: SEGV on unknown address 0x55a4e1aa6b04 (pc 0x55a461a0a4df bp 0x7ffff8f647d0 sp 0x7ffff8f64500 T0)
+==153769==The signal is caused by a READ memory access.
+    #0 0x55a461a0a4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55a461a0a4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55a4619ee8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55a4619ee8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f6431a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f6431a29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55a461925994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153769==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000008,sig:11,src:000799,time:37590,execs:28952,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000008,sig:11,src:000799,time:37590,execs:28952,op:havoc,rep:2, link-type C_HDLC (Cisco HDLC)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153771==ERROR: AddressSanitizer: SEGV on unknown address 0x555da2d8eba0 (pc 0x555d418f54df bp 0x7fff02f4ccb0 sp 0x7fff02f4c9e0 T0)
+==153771==The signal is caused by a READ memory access.
+    #0 0x555d418f54df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x555d418f54df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x555d418d98a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x555d418d98a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f711d429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f711d429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x555d41810994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153771==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000009,sig:11,src:000799,time:37896,execs:29158,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000009,sig:11,src:000799,time:37896,execs:29158,op:havoc,rep:2, link-type 264
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153773==ERROR: AddressSanitizer: SEGV on unknown address 0x56370bd54028 (pc 0x5636ecb7b4df bp 0x7ffcf19470f0 sp 0x7ffcf1946e20 T0)
+==153773==The signal is caused by a READ memory access.
+    #0 0x5636ecb7b4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5636ecb7b4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5636ecb5f8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5636ecb5f8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f635de29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f635de29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5636eca96994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153773==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000010,sig:11,src:000815,time:40270,execs:30758,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000010,sig:11,src:000815,time:40270,execs:30758,op:havoc,rep:1, link-type ARCNET (BSD ARCNET)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153775==ERROR: AddressSanitizer: SEGV on unknown address 0x55894b0fcde4 (pc 0x5589392774df bp 0x7ffc87eaded0 sp 0x7ffc87eadc00 T0)
+==153775==The signal is caused by a READ memory access.
+    #0 0x5589392774df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5589392774df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55893925b8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55893925b8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fa7fba29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fa7fba29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x558939192994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153775==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000011,sig:11,src:000815,time:40459,execs:30887,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000011,sig:11,src:000815,time:40459,execs:30887,op:havoc,rep:2, link-type JUNIPER_ATM2 (Juniper ATM2 PIC)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153777==ERROR: AddressSanitizer: SEGV on unknown address 0x562f514c7f40 (pc 0x562f4d7b04df bp 0x7ffc1733e9b0 sp 0x7ffc1733e6e0 T0)
+==153777==The signal is caused by a READ memory access.
+    #0 0x562f4d7b04df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x562f4d7b04df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x562f4d7948a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x562f4d7948a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f5cfc229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f5cfc229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x562f4d6cb994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153777==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000012,sig:11,src:000822,time:41117,execs:31339,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000012,sig:11,src:000822,time:41117,execs:31339,op:havoc,rep:1, link-type PPP (PPP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153779==ERROR: AddressSanitizer: SEGV on unknown address 0x55da9e1837cc (pc 0x55da8eb984df bp 0x7ffc739dae10 sp 0x7ffc739dab40 T0)
+==153779==The signal is caused by a READ memory access.
+    #0 0x55da8eb984df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55da8eb984df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55da8eb7c8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55da8eb7c8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f17b7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f17b7c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55da8eab3994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153779==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000013,sig:11,src:000821,time:43646,execs:33039,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000013,sig:11,src:000821,time:43646,execs:33039,op:havoc,rep:2, link-type NULL (BSD loopback)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153781==ERROR: AddressSanitizer: SEGV on unknown address 0x563d269fcddc (pc 0x563d1a4e04df bp 0x7ffc5b365e90 sp 0x7ffc5b365bc0 T0)
+==153781==The signal is caused by a READ memory access.
+    #0 0x563d1a4e04df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x563d1a4e04df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x563d1a4c48a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x563d1a4c48a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f8d1bc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f8d1bc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x563d1a3fb994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153781==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000014,sig:11,src:000814,time:44635,execs:33710,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000014,sig:11,src:000814,time:44635,execs:33710,op:havoc,rep:2, link-type RAW (Raw IP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153783==ERROR: AddressSanitizer: SEGV on unknown address 0x5615099230fc (pc 0x561497ff14df bp 0x7fff8540f790 sp 0x7fff8540f4c0 T0)
+==153783==The signal is caused by a READ memory access.
+    #0 0x561497ff14df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x561497ff14df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x561497fd58a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x561497fd58a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f803ec29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f803ec29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x561497f0c994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153783==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000015,sig:11,src:000820,time:45292,execs:34153,op:havoc,rep:6
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000015,sig:11,src:000820,time:45292,execs:34153,op:havoc,rep:6, link-type PPP_PPPD (PPP for pppd, with direction flag)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153785==ERROR: AddressSanitizer: SEGV on unknown address 0x55acf7c20234 (pc 0x55acf339f4df bp 0x7ffc1ce88150 sp 0x7ffc1ce87e80 T0)
+==153785==The signal is caused by a READ memory access.
+    #0 0x55acf339f4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55acf339f4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55acf33838a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55acf33838a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f26cd229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f26cd229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55acf32ba994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153785==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000016,sig:11,src:000813,time:46481,execs:34966,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000016,sig:11,src:000813,time:46481,execs:34966,op:havoc,rep:1, link-type ATM_RFC1483 (RFC 1483 LLC-encapsulated ATM)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153787==ERROR: AddressSanitizer: SEGV on unknown address 0x556130fc637c (pc 0x5560f673c4df bp 0x7ffdcced0b90 sp 0x7ffdcced08c0 T0)
+==153787==The signal is caused by a READ memory access.
+    #0 0x5560f673c4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5560f673c4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5560f67208a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5560f67208a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f119da29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f119da29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5560f6657994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153787==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000017,sig:11,src:000811,time:47235,execs:35479,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000017,sig:11,src:000811,time:47235,execs:35479,op:havoc,rep:2, link-type NULL (BSD loopback)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153789==ERROR: AddressSanitizer: SEGV on unknown address 0x56491f142fa0 (pc 0x5648d98ca4df bp 0x7ffe24e46cb0 sp 0x7ffe24e469e0 T0)
+==153789==The signal is caused by a READ memory access.
+    #0 0x5648d98ca4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5648d98ca4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5648d98ae8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5648d98ae8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fe5d3229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fe5d3229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5648d97e5994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153789==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000018,sig:11,src:000817,time:54925,execs:40546,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000018,sig:11,src:000817,time:54925,execs:40546,op:havoc,rep:2, link-type IEEE802_11_RADIO (802.11 plus radiotap header)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153791==ERROR: AddressSanitizer: SEGV on unknown address 0x560b31b7c18c (pc 0x560aeafa44df bp 0x7ffe2e93fc10 sp 0x7ffe2e93f940 T0)
+==153791==The signal is caused by a READ memory access.
+    #0 0x560aeafa44df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x560aeafa44df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x560aeaf888a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x560aeaf888a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f7a50029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f7a50029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x560aeaebf994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153791==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000019,sig:11,src:000817+000010,time:55433,execs:40880,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000019,sig:11,src:000817+000010,time:55433,execs:40880,op:splice,rep:1, link-type IEEE802_15_4 (IEEE 802.15.4 with FCS)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153793==ERROR: AddressSanitizer: SEGV on unknown address 0x5568d62a87a8 (pc 0x5568c78744df bp 0x7ffc6dc22cf0 sp 0x7ffc6dc22a20 T0)
+==153793==The signal is caused by a READ memory access.
+    #0 0x5568c78744df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5568c78744df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5568c78588a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5568c78588a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fc1d4629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fc1d4629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5568c778f994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153793==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000020,sig:11,src:000808,time:56654,execs:41672,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000020,sig:11,src:000808,time:56654,execs:41672,op:havoc,rep:1, link-type IEEE802 (Token ring)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153795==ERROR: AddressSanitizer: SEGV on unknown address 0x55e1dd76ec7c (pc 0x55e1604284df bp 0x7fffe24b5390 sp 0x7fffe24b50c0 T0)
+==153795==The signal is caused by a READ memory access.
+    #0 0x55e1604284df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55e1604284df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55e16040c8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55e16040c8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f29d1c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f29d1c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55e160343994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153795==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000021,sig:11,src:000808,time:56674,execs:41686,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000021,sig:11,src:000808,time:56674,execs:41686,op:havoc,rep:2, link-type PPP_BSDOS (BSD/OS PPP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153797==ERROR: AddressSanitizer: SEGV on unknown address 0x559393fe73cc (pc 0x55937175c4df bp 0x7ffd0ced8e10 sp 0x7ffd0ced8b40 T0)
+==153797==The signal is caused by a READ memory access.
+    #0 0x55937175c4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55937175c4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5593717408a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5593717408a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f5d9f829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f5d9f829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x559371677994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153797==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000022,sig:11,src:000831,time:58455,execs:42879,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000022,sig:11,src:000831,time:58455,execs:42879,op:havoc,rep:1, link-type PKTAP (Apple DLT_PKTAP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153799==ERROR: AddressSanitizer: SEGV on unknown address 0x56490345a4ec (pc 0x5648ab94a4df bp 0x7ffeb6301710 sp 0x7ffeb6301440 T0)
+==153799==The signal is caused by a READ memory access.
+    #0 0x5648ab94a4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5648ab94a4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5648ab92e8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5648ab92e8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f758f429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f758f429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5648ab865994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153799==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000023,sig:11,src:000832,time:63180,execs:46053,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000023,sig:11,src:000832,time:63180,execs:46053,op:havoc,rep:1, link-type PPP_BSDOS (BSD/OS PPP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153801==ERROR: AddressSanitizer: SEGV on unknown address 0x562b5d4299a8 (pc 0x562b0d8734df bp 0x7ffe76833cf0 sp 0x7ffe76833a20 T0)
+==153801==The signal is caused by a READ memory access.
+    #0 0x562b0d8734df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x562b0d8734df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x562b0d8578a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x562b0d8578a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f6d7f429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f6d7f429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x562b0d78e994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153801==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000024,sig:11,src:000832,time:63588,execs:46330,op:havoc,rep:5
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000024,sig:11,src:000832,time:63588,execs:46330,op:havoc,rep:5, link-type SLIP_BSDOS (BSD/OS SLIP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153803==ERROR: AddressSanitizer: SEGV on unknown address 0x556f761300a0 (pc 0x556eff1394df bp 0x7fffb0a374b0 sp 0x7fffb0a371e0 T0)
+==153803==The signal is caused by a READ memory access.
+    #0 0x556eff1394df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x556eff1394df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x556eff11d8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x556eff11d8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fe6fe429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fe6fe429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x556eff054994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153803==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000025,sig:11,src:000832,time:63920,execs:46556,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000025,sig:11,src:000832,time:63920,execs:46556,op:havoc,rep:2, link-type JUNIPER_ES (Juniper Encryption Services PIC)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153805==ERROR: AddressSanitizer: SEGV on unknown address 0x55e8ea712cfc (pc 0x55e87a22d4df bp 0x7fff7b1ad790 sp 0x7fff7b1ad4c0 T0)
+==153805==The signal is caused by a READ memory access.
+    #0 0x55e87a22d4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55e87a22d4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55e87a2118a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55e87a2118a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f3182e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f3182e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55e87a148994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153805==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000026,sig:11,src:000829+000592,time:68288,execs:49484,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000026,sig:11,src:000829+000592,time:68288,execs:49484,op:splice,rep:1, link-type IEEE802_11 (802.11)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153807==ERROR: AddressSanitizer: SEGV on unknown address 0x55c0402b75e0 (pc 0x55bff5c5b4df bp 0x7ffe4bd61eb0 sp 0x7ffe4bd61be0 T0)
+==153807==The signal is caused by a READ memory access.
+    #0 0x55bff5c5b4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55bff5c5b4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55bff5c3f8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55bff5c3f8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f6c86829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f6c86829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55bff5b76994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153807==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000027,sig:11,src:000833,time:68919,execs:49911,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000027,sig:11,src:000833,time:68919,execs:49911,op:havoc,rep:1, link-type SLIP_BSDOS (BSD/OS SLIP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153809==ERROR: AddressSanitizer: SEGV on unknown address 0x55d854c87074 (pc 0x55d7f1f744df bp 0x7fff0f317350 sp 0x7fff0f317080 T0)
+==153809==The signal is caused by a READ memory access.
+    #0 0x55d7f1f744df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55d7f1f744df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55d7f1f588a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55d7f1f588a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fcb0ea29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fcb0ea29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55d7f1e8f994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153809==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000028,sig:11,src:000833,time:69150,execs:50069,op:havoc,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000028,sig:11,src:000833,time:69150,execs:50069,op:havoc,rep:1, link-type IPV4 (Raw IPv4)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153811==ERROR: AddressSanitizer: SEGV on unknown address 0x5587b0f1bbf4 (pc 0x5587341d44df bp 0x7fffdf4bcf50 sp 0x7fffdf4bcc80 T0)
+==153811==The signal is caused by a READ memory access.
+    #0 0x5587341d44df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5587341d44df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5587341b88a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5587341b88a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fa72f829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fa72f829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5587340ef994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153811==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000029,sig:11,src:000809+000759,time:71273,execs:51510,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000029,sig:11,src:000809+000759,time:71273,execs:51510,op:splice,rep:1, link-type LINUX_SLL (Linux cooked)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153813==ERROR: AddressSanitizer: SEGV on unknown address 0x55cb9498e384 (pc 0x55cb2e1a04df bp 0x7fff2c9f0bd0 sp 0x7fff2c9f0900 T0)
+==153813==The signal is caused by a READ memory access.
+    #0 0x55cb2e1a04df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55cb2e1a04df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55cb2e1848a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55cb2e1848a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fee17e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fee17e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55cb2e0bb994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153813==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000030,sig:11,src:000809+000759,time:71840,execs:51910,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000030,sig:11,src:000809+000759,time:71840,execs:51910,op:splice,rep:1, link-type IP_OVER_FC (RFC 2625 IP-over-Fibre Channel)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153815==ERROR: AddressSanitizer: SEGV on unknown address 0x55d81db3b420 (pc 0x55d7f3e774df bp 0x7ffd470a10b0 sp 0x7ffd470a0de0 T0)
+==153815==The signal is caused by a READ memory access.
+    #0 0x55d7f3e774df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55d7f3e774df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55d7f3e5b8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55d7f3e5b8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fd28f029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fd28f029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55d7f3d92994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153815==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000031,sig:11,src:000809+000759,time:71870,execs:51933,op:splice,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000031,sig:11,src:000809+000759,time:71870,execs:51933,op:splice,rep:2, link-type LINUX_SLL (Linux cooked)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153817==ERROR: AddressSanitizer: SEGV on unknown address 0x56111e062f78 (pc 0x5610cfa0e4df bp 0x7ffe6bd26b70 sp 0x7ffe6bd268a0 T0)
+==153817==The signal is caused by a READ memory access.
+    #0 0x5610cfa0e4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x5610cfa0e4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x5610cf9f28a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x5610cf9f28a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f61b4e29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f61b4e29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x5610cf929994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153817==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000032,sig:11,src:000809+000759,time:72053,execs:52072,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000032,sig:11,src:000809+000759,time:72053,execs:52072,op:splice,rep:1, link-type LOOP (OpenBSD loopback)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153819==ERROR: AddressSanitizer: SEGV on unknown address 0x55ad136cf50c (pc 0x55ad032d94df bp 0x7ffc7aa31810 sp 0x7ffc7aa31540 T0)
+==153819==The signal is caused by a READ memory access.
+    #0 0x55ad032d94df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55ad032d94df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55ad032bd8a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55ad032bd8a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f2825429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f2825429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55ad031f4994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153819==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000033,sig:11,src:000809+000759,time:73555,execs:53122,op:splice,rep:1
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000033,sig:11,src:000809+000759,time:73555,execs:53122,op:splice,rep:1, link-type JUNIPER_GGSN (Juniper GGSN PIC)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153821==ERROR: AddressSanitizer: SEGV on unknown address 0x55bc92f08f54 (pc 0x55bc43c114df bp 0x7ffe7223ea50 sp 0x7ffe7223e780 T0)
+==153821==The signal is caused by a READ memory access.
+    #0 0x55bc43c114df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x55bc43c114df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x55bc43bf58a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x55bc43bf58a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f2a4a029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f2a4a029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x55bc43b2c994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153821==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000034,sig:11,src:000803,time:100053,execs:69511,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000034,sig:11,src:000803,time:100053,execs:69511,op:havoc,rep:2, link-type MFR (FRF.16 Frame Relay)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153823==ERROR: AddressSanitizer: SEGV on unknown address 0x562b925e16e8 (pc 0x562b6ce644df bp 0x7ffd2466a6f0 sp 0x7ffd2466a420 T0)
+==153823==The signal is caused by a READ memory access.
+    #0 0x562b6ce644df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x562b6ce644df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x562b6ce488a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x562b6ce488a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f322e229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f322e229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x562b6cd7f994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153823==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000035,sig:11,src:000823,time:100870,execs:70060,op:havoc,rep:4
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000035,sig:11,src:000823,time:100870,execs:70060,op:havoc,rep:4, link-type RAW (Raw IP)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153825==ERROR: AddressSanitizer: SEGV on unknown address 0x560d8426c828 (pc 0x560d6054e4df bp 0x7ffd173730f0 sp 0x7ffd17372e20 T0)
+==153825==The signal is caused by a READ memory access.
+    #0 0x560d6054e4df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x560d6054e4df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x560d605328a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x560d605328a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7f685bc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f685bc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x560d60469994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153825==ABORTING
+Input: /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000036,sig:11,src:000811,time:101679,execs:70606,op:havoc,rep:2
+reading from file /home/fuzz/project/fuzzing_tcpdump/output/default/crashes/id:000036,sig:11,src:000811,time:101679,execs:70606,op:havoc,rep:2, link-type EN10MB (Ethernet)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==153827==ERROR: AddressSanitizer: SEGV on unknown address 0x56109bb91cc4 (pc 0x561095c544df bp 0x7ffc2846d5d0 sp 0x7ffc2846d300 T0)
+==153827==The signal is caused by a READ memory access.
+    #0 0x561095c544df in init_crc10_table /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24
+    #1 0x561095c544df in init_checksum /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:130:5
+    #2 0x561095c388a0 in init_print /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./print.c:247:2
+    #3 0x561095c388a0 in main /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./tcpdump.c:1773:2
+    #4 0x7fcf14c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7fcf14c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x561095b6f994 in _start (/home/fuzz/project/fuzzing_tcpdump/tcpdump_fuzz+0x2e8994) (BuildId: f1eefb46ebe99bfe)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/fuzz/project/fuzzing_tcpdump/tcpdump-4.9.2/./checksum.c:102:24 in init_crc10_table
+==153827==ABORTING
