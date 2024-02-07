@@ -1,0 +1,6 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=install/bin/tiffinfo
+AFL_CUSTOM_INFO_PROGRAM_ARGV=-D -j -c -r -s -w @@
+AFL_CUSTOM_INFO_OUT=./output/default
+# command line:
+'afl-fuzz' '-m' 'none' '-i' 'tiff-4.0.4/test/images/' '-o' './output' '-s' '123' '--' 'install/bin/tiffinfo' '-D' '-j' '-c' '-r' '-s' '-w' '@@'
