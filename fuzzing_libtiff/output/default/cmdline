@@ -1,4 +1,4 @@
-install/bin/tiffinfo
+./install/bin/tiffinfo
 -D
 -j
 -c

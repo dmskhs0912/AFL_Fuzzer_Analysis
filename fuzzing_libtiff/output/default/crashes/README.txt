@@ -1,6 +1,6 @@
 Command line used to find this crash:
 
-afl-fuzz -m none -i tiff-4.0.4/test/images/ -o ./output -s 123 -- install/bin/tiffinfo -D -j -c -r -s -w @@
+afl-fuzz -m none -i tiff-4.0.4/test/images/ -o output -s 123 -- ./install/bin/tiffinfo -D -j -c -r -s -w @@
 
 If you can't reproduce a bug outside of afl-fuzz, be sure to set the same
 memory limit. The limit used for this fuzzing session was 0 B.

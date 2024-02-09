@@ -1,0 +1,2540 @@
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/README.txt
+/home/fuzz/project/fuzzing_libtiff/output/default/crashes/README.txt: Not a TIFF or MDI file, bad magic number 28483 (0x6f43).
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000000,sig:06,src:000004,time:87470,execs:79583,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 59395 (0xe803) encountered.
+=================================================================
+==1136878==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000b1 at pc 0x560a1f0966d1 bp 0x7ffc2a37cdf0 sp 0x7ffc2a37c5b8
+READ of size 2 at 0x6020000000b1 thread T0
+    #0 0x560a1f0966d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x560a1f2c461f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x560a1f2c461f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x560a1f13c6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x560a1f13bb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f47ace29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f47ace29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x560a1f079764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000b1 is located 0 bytes to the right of 1-byte region [0x6020000000b0,0x6020000000b1)
+allocated by thread T0 here:
+    #0 0x560a1f0fc5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x560a1f152b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x560a1f152b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x560a1f152b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x560a1f14a1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x560a1f14a1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x560a1f184535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x560a1f175fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x560a1f286834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x560a1f13b8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x560a1f13b8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x560a1f13b8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f47ace29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa 02 fa fa fa fd fa
+=>0x0c047fff8010: fa fa fd fa fa fa[01]fa fa fa fd fa fa fa 00 00
+  0x0c047fff8020: fa fa fd fa fa fa 00 00 fa fa fd fd fa fa 00 02
+  0x0c047fff8030: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136878==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000001,sig:06,src:000004,time:89098,execs:80707,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 58133 (0xe315) encountered.
+=================================================================
+==1136880==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000111 at pc 0x556d60a186d1 bp 0x7ffee918f7f0 sp 0x7ffee918efb8
+READ of size 2 at 0x602000000111 thread T0
+    #0 0x556d60a186d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x556d60c4661f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x556d60c4661f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x556d60abe6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x556d60abdb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f1588029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f1588029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x556d609fb764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x602000000111 is located 0 bytes to the right of 1-byte region [0x602000000110,0x602000000111)
+allocated by thread T0 here:
+    #0 0x556d60a7e5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x556d60ad4b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x556d60ad4b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x556d60ad4b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x556d60acc1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x556d60acc1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x556d60b06535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x556d60af7fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x556d60c08834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x556d60abd8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x556d60abd8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x556d60abd8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f1588029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa 02 fa fa fa fd fa
+  0x0c047fff8010: fa fa fd fa fa fa fd fd fa fa 00 fa fa fa fd fa
+=>0x0c047fff8020: fa fa[01]fa fa fa fd fa fa fa fd fd fa fa 00 fa
+  0x0c047fff8030: fa fa fd fd fa fa 00 02 fa fa fd fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136880==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000002,sig:06,src:000262,time:139034,execs:121083,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 65510 (0xffe6) encountered.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136882==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000f2 at pc 0x5614e90786d1 bp 0x7fff49a814b0 sp 0x7fff49a80c78
+READ of size 3 at 0x6020000000f2 thread T0
+    #0 0x5614e90786d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5614e92a661f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5614e92a661f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5614e911e6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5614e911db7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7efee7229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7efee7229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5614e905b764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000f2 is located 0 bytes to the right of 2-byte region [0x6020000000f0,0x6020000000f2)
+allocated by thread T0 here:
+    #0 0x5614e90de5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5614e9134b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5614e9134b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5614e9134b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5614e912c1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5614e912c1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5614e9166535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5614e9157fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5614e9268834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5614e911d8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5614e911d8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5614e911d8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7efee7229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa 02 fa fa fa fd fa
+=>0x0c047fff8010: fa fa fd fa fa fa 00 00 fa fa fd fa fa fa[02]fa
+  0x0c047fff8020: fa fa fd fd fa fa 00 02 fa fa fd fa fa fa 00 00
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136882==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000003,sig:06,src:000181,time:169134,execs:152593,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+=================================================================
+==1136884==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5625a55f16d1 bp 0x7ffd95ed6150 sp 0x7ffd95ed5918
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5625a55f16d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5625a581f61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5625a581f61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5625a56976ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5625a5696b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fb38ee29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fb38ee29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5625a55d4764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x5625a56575ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5625a56adb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5625a56adb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5625a56adb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5625a56a51ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5625a56a51ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5625a56df535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5625a56d0fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5625a57e1834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5625a56968ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5625a56968ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5625a56968ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fb38ee29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136884==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000004,sig:06,src:000181,time:172076,execs:155005,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, incorrect count for field "PageNumber", expected 2, got 385875970.
+=================================================================
+==1136886==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55df3f4606d1 bp 0x7ffcce4eee70 sp 0x7ffcce4ee638
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55df3f4606d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55df3f68e61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55df3f68e61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55df3f5066ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55df3f505b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fcace029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fcace029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55df3f443764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55df3f4c65ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55df3f51cb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55df3f51cb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55df3f51cb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55df3f5141ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55df3f5141ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55df3f54e535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55df3f53ffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55df3f650834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55df3f5058ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55df3f5058ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55df3f5058ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fcace029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136886==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000005,sig:06,src:000282,time:239814,execs:218069,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 62982 (0xf606) encountered.
+=================================================================
+==1136888==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000b1 at pc 0x55b372d836d1 bp 0x7ffdeb0af490 sp 0x7ffdeb0aec58
+READ of size 2 at 0x6020000000b1 thread T0
+    #0 0x55b372d836d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55b372fb161f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55b372fb161f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55b372e296ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55b372e28b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fef10229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fef10229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55b372d66764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000b1 is located 0 bytes to the right of 1-byte region [0x6020000000b0,0x6020000000b1)
+allocated by thread T0 here:
+    #0 0x55b372de95ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55b372e3fb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55b372e3fb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55b372e3fb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55b372e371ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55b372e371ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55b372e71535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55b372e62fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55b372f73834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55b372e288ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55b372e288ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55b372e288ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fef10229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 02 fa
+=>0x0c047fff8010: fa fa fd fa fa fa[01]fa fa fa fd fa fa fa 00 00
+  0x0c047fff8020: fa fa fd fa fa fa 00 00 fa fa fd fd fa fa 00 02
+  0x0c047fff8030: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136888==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000006,sig:06,src:000282,time:240996,execs:219079,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 34439 (0x8687) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 26694 (0x6846) encountered.
+TIFFFetchNormalTag: Warning, ASCII value for tag "ImageDescription" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFFetchNormalTag: Warning, ASCII value for tag "Artist" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+=================================================================
+==1136890==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x603000000144 at pc 0x55ccc9a526d1 bp 0x7ffef8e822f0 sp 0x7ffef8e81ab8
+READ of size 21 at 0x603000000144 thread T0
+    #0 0x55ccc9a526d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55ccc9c8061f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55ccc9c8061f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55ccc9af86ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55ccc9af7b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f5b76c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f5b76c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55ccc9a35764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x603000000144 is located 0 bytes to the right of 20-byte region [0x603000000130,0x603000000144)
+allocated by thread T0 here:
+    #0 0x55ccc9ab85ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55ccc9b0eb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55ccc9b0eb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55ccc9b0eb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55ccc9b061ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55ccc9b061ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55ccc9b40535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55ccc9b31fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55ccc9c42834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55ccc9af78ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55ccc9af78ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55ccc9af78ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f5b76c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c067fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff8000: fa fa 00 00 00 fa fa fa 00 00 00 00 fa fa 00 00
+  0x0c067fff8010: 00 00 fa fa fd fd fd fa fa fa fd fd fd fa fa fa
+=>0x0c067fff8020: fd fd fd fa fa fa 00 00[04]fa fa fa fa fa fa fa
+  0x0c067fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136890==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000007,sig:06,src:000329,time:372765,execs:341588,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+=================================================================
+==1136892==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5622a5c286d1 bp 0x7ffc9cfd04d0 sp 0x7ffc9cfcfc98
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5622a5c286d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5622a5e5661f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5622a5e5661f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5622a5cce6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5622a5ccdb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7eff6c829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7eff6c829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5622a5c0b764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x5622a5c8e5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5622a5ce4b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5622a5ce4b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5622a5ce4b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5622a5cdc1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5622a5cdc1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5622a5d16535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5622a5d07fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5622a5e18834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5622a5ccd8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5622a5ccd8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5622a5ccd8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7eff6c829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136892==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000008,sig:06,src:000330,time:388095,execs:356562,op:havoc,rep:1
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PageNumber"; tag ignored.
+=================================================================
+==1136894==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55d8ab2526d1 bp 0x7ffde24fbb90 sp 0x7ffde24fb358
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55d8ab2526d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55d8ab48061f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55d8ab48061f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55d8ab2f86ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55d8ab2f7b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fbfa3a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fbfa3a29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55d8ab235764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55d8ab2b85ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55d8ab30eb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55d8ab30eb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55d8ab30eb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55d8ab3061ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55d8ab3061ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55d8ab340535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55d8ab331fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55d8ab442834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55d8ab2f78ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55d8ab2f78ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55d8ab2f78ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fbfa3a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136894==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000009,sig:06,src:000399,time:499757,execs:462527,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136896==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5646796396d1 bp 0x7ffd6149e530 sp 0x7ffd6149dcf8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5646796396d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x56467986761f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x56467986761f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5646796df6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5646796deb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f6562829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f6562829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56467961c764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x56467969f5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5646796f5b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5646796f5b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5646796f5b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5646796ed1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5646796ed1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x564679727535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x564679718fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x564679829834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5646796de8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5646796de8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5646796de8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f6562829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136896==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000010,sig:06,src:000403,time:505907,execs:468578,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 59688 (0xe928) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 57146 (0xdf3a) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "ImageDescription"; tag ignored.
+TIFFFetchNormalTag: Warning, Incompatible type for "SubIFD"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DateTime" does not end in null byte.
+=================================================================
+==1136898==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000015a at pc 0x562f710c36d1 bp 0x7fff8a032210 sp 0x7fff8a0319d8
+READ of size 11 at 0x60200000015a thread T0
+    #0 0x562f710c36d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x562f712f161f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x562f712f161f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x562f711696ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x562f71168b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f3cadc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f3cadc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x562f710a6764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x60200000015a is located 0 bytes to the right of 10-byte region [0x602000000150,0x60200000015a)
+allocated by thread T0 here:
+    #0 0x562f711295ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x562f7117fb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x562f7117fb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x562f7117fb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x562f711771ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x562f711771ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x562f711b1535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x562f711a2fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x562f712b3834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x562f711688ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x562f711688ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x562f711688ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f3cadc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 02 fa
+  0x0c047fff8010: fa fa fd fa fa fa 00 00 fa fa fd fa fa fa 00 00
+=>0x0c047fff8020: fa fa 00 07 fa fa fd fd fa fa 00[02]fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136898==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000011,sig:06,src:000403,time:512660,execs:473950,op:havoc,rep:1
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 64796 (0xfd1c) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 59688 (0xe928) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "ImageDescription"; tag ignored.
+TIFFFetchNormalTag: Warning, Incompatible type for "SubIFD"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DateTime" does not end in null byte.
+TIFFFetchNormalTag: Warning, ASCII value for tag "Artist" does not end in null byte.
+=================================================================
+==1136900==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000171 at pc 0x5598c7cf06d1 bp 0x7ffd53586790 sp 0x7ffd53585f58
+READ of size 2 at 0x602000000171 thread T0
+    #0 0x5598c7cf06d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5598c7f1e61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5598c7f1e61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5598c7d966ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5598c7d95b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7efefee29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7efefee29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5598c7cd3764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x602000000171 is located 0 bytes to the right of 1-byte region [0x602000000170,0x602000000171)
+allocated by thread T0 here:
+    #0 0x5598c7d565ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5598c7dacb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5598c7dacb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5598c7dacb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5598c7da41ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5598c7da41ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5598c7dde535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5598c7dcffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5598c7ee0834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5598c7d958ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5598c7d958ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5598c7d958ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7efefee29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 02 fa
+  0x0c047fff8010: fa fa fd fa fa fa fd fd fa fa 00 fa fa fa fd fa
+=>0x0c047fff8020: fa fa fd fd fa fa 00 fa fa fa fd fa fa fa[01]fa
+  0x0c047fff8030: fa fa 00 07 fa fa fd fd fa fa fd fd fa fa 00 03
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136900==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000012,sig:06,src:000426,time:532868,execs:493145,op:havoc,rep:5
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 59688 (0xe928) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 342 (0x156) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "ImageDescription"; tag ignored.
+TIFFFetchNormalTag: Warning, Incompatible type for "SubIFD"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "Software" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFFetchNormalTag: Warning, IO error during reading of "DateTime"; tag ignored.
+=================================================================
+==1136902==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000015a at pc 0x5599cba006d1 bp 0x7ffcc1129c90 sp 0x7ffcc1129458
+READ of size 11 at 0x60200000015a thread T0
+    #0 0x5599cba006d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5599cbc2e61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5599cbc2e61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5599cbaa66ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5599cbaa5b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7ff979029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7ff979029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5599cb9e3764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x60200000015a is located 0 bytes to the right of 10-byte region [0x602000000150,0x60200000015a)
+allocated by thread T0 here:
+    #0 0x5599cba665ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5599cbabcb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5599cbabcb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5599cbabcb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5599cbab41ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5599cbab41ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5599cbaee535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5599cbadffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5599cbbf0834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5599cbaa58ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5599cbaa58ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5599cbaa58ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7ff979029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 02 fa
+  0x0c047fff8010: fa fa fd fa fa fa 00 00 fa fa fd fa fa fa 00 00
+=>0x0c047fff8020: fa fa 00 07 fa fa fd fd fa fa 00[02]fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136902==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000013,sig:06,src:000324,time:582398,execs:539134,op:havoc,rep:7
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+=================================================================
+==1136904==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5638810046d1 bp 0x7fff31bb8270 sp 0x7fff31bb7a38
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5638810046d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x56388123261f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x56388123261f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5638810aa6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5638810a9b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fae92829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fae92829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x563880fe7764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x56388106a5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5638810c0b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5638810c0b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5638810c0b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5638810b81ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5638810b81ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5638810f2535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5638810e3fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5638811f4834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5638810a98ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5638810a98ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5638810a98ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fae92829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136904==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000014,sig:06,src:000445,time:689576,execs:639555,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DocumentName" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136906==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55a324dd16d1 bp 0x7ffe16c64a30 sp 0x7ffe16c641f8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55a324dd16d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55a324fff61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55a324fff61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55a324e776ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55a324e76b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fa6b7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fa6b7c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55a324db4764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55a324e375ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55a324e8db86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55a324e8db86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55a324e8db86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55a324e851ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55a324e851ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55a324ebf535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55a324eb0fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55a324fc1834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55a324e768ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55a324e768ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55a324e768ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fa6b7c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136906==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000015,sig:06,src:000324,time:729019,execs:676787,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, IO error during reading of "DocumentName"; tag ignored.
+=================================================================
+==1136908==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55fb58d696d1 bp 0x7ffc19523a50 sp 0x7ffc19523218
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55fb58d696d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55fb58f9761f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55fb58f9761f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55fb58e0f6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55fb58e0eb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f2156829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f2156829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55fb58d4c764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55fb58dcf5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55fb58e25b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55fb58e25b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55fb58e25b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55fb58e1d1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55fb58e1d1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55fb58e57535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55fb58e48fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55fb58f59834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55fb58e0e8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55fb58e0e8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55fb58e0e8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f2156829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136908==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000016,sig:06,src:000449+000178,time:745664,execs:693583,op:splice,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 12550 (0x3106) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 298 (0x12a) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 10752 (0x2a00) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 65535 (0xffff) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 63578 (0xf85a) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 65479 (0xffc7) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 57303 (0xdfd7) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 32767 (0x7fff) encountered.
+TIFFFetchNormalTag: Warning, incorrect count for field "DotRange", expected 2, got 892877111.
+TIFFFetchNormalTag: Warning, Sanity check on size of "Tag 10752" value failed; tag ignored.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136910==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x603000000233 at pc 0x56386449a6d1 bp 0x7ffde617d9b0 sp 0x7ffde617d178
+READ of size 20 at 0x603000000233 thread T0
+    #0 0x56386449a6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5638646c861f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5638646c861f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5638645406ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x56386453fb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f97dc229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f97dc229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56386447d764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x603000000233 is located 0 bytes to the right of 19-byte region [0x603000000220,0x603000000233)
+allocated by thread T0 here:
+    #0 0x5638645005ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x563864556b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x563864556b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x563864556b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x56386454e1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x56386454e1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x563864588535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x563864579fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x56386468a834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x56386453f8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x56386453f8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x56386453f8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f97dc229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c067fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff8000: fa fa 00 00 00 fa fa fa 00 00 00 00 fa fa 00 00
+  0x0c067fff8010: 00 00 fa fa 00 00 00 00 fa fa 00 00 00 00 fa fa
+  0x0c067fff8020: 00 00 00 00 fa fa 00 00 00 00 fa fa 00 00 00 00
+  0x0c067fff8030: fa fa 00 00 00 00 fa fa fd fd fd fa fa fa fd fd
+=>0x0c067fff8040: fd fa fa fa 00 00[03]fa fa fa fa fa fa fa fa fa
+  0x0c067fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8090: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136910==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000017,sig:06,src:000415,time:754523,execs:701774,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 12550 (0x3106) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 32512 (0x7f00) encountered.
+TIFFFetchNormalTag: Warning, incorrect count for field "DotRange", expected 2, got 892877111.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DocumentName" contains null byte in value; value incorrectly truncated during reading due to implementation limitations.
+TIFFFetchNormalTag: Warning, incorrect count for field "PageNumber", expected 2, got 16252927.
+=================================================================
+==1136912==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000131 at pc 0x562b52ed66d1 bp 0x7fffe75c8cf0 sp 0x7fffe75c84b8
+READ of size 2 at 0x602000000131 thread T0
+    #0 0x562b52ed66d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x562b5310461f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x562b5310461f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x562b52f7c6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x562b52f7bb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f413fe29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f413fe29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x562b52eb9764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x602000000131 is located 0 bytes to the right of 1-byte region [0x602000000130,0x602000000131)
+allocated by thread T0 here:
+    #0 0x562b52f3c5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x562b52f92b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x562b52f92b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x562b52f92b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x562b52f8a1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x562b52f8a1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x562b52fc4535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x562b52fb5fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x562b530c6834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x562b52f7b8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x562b52f7b8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x562b52f7b8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f413fe29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa 02 fa fa fa 01 fa
+  0x0c047fff8010: fa fa fd fa fa fa 00 fa fa fa fd fa fa fa 00 fa
+=>0x0c047fff8020: fa fa fd fa fa fa[01]fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136912==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000018,sig:06,src:000478,time:768732,execs:716200,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 54998 (0xd6d6) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DocumentName" does not end in null byte.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, IO error during reading of "ColorMap"; tag ignored.
+=================================================================
+==1136914==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x564d4975d6d1 bp 0x7fff1f181c50 sp 0x7fff1f181418
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x564d4975d6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x564d4998b61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x564d4998b61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x564d498036ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x564d49802b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f09c7229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f09c7229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x564d49740764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x564d497c35ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x564d49819b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x564d49819b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x564d49819b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x564d498111ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x564d498111ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x564d4984b535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x564d4983cfb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x564d4994d834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x564d498028ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x564d498028ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x564d498028ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f09c7229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136914==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000019,sig:06,src:000478,time:773594,execs:720847,op:havoc,rep:6
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 56834 (0xde02) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DocumentName" does not end in null byte.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, Ignoring ColorMap since BitsPerSample tag not found.
+=================================================================
+==1136916==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x607000000141 at pc 0x561125c456d1 bp 0x7ffededefbf0 sp 0x7ffededef3b8
+READ of size 66 at 0x607000000141 thread T0
+    #0 0x561125c456d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x561125e7361f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x561125e7361f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x561125ceb6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x561125ceab7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fe6f0429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fe6f0429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x561125c28764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x607000000141 is located 0 bytes to the right of 65-byte region [0x607000000100,0x607000000141)
+allocated by thread T0 here:
+    #0 0x561125cab5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x561125d01b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x561125d01b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x561125d01b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x561125cf91ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x561125cf91ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x561125d33535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x561125d24fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x561125e35834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x561125cea8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x561125cea8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x561125cea8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fe6f0429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+  0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00 00 fa fa fa fa fa
+=>0x0c0e7fff8020: 00 00 00 00 00 00 00 00[01]fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136916==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000020,sig:06,src:000478,time:780676,execs:727844,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, Ignoring ColorMap since BitsPerSample tag not found.
+=================================================================
+==1136918==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x556ea892f6d1 bp 0x7fff9d6052b0 sp 0x7fff9d604a78
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x556ea892f6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x556ea8b5d61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x556ea8b5d61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x556ea89d56ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x556ea89d4b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f0460a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f0460a29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x556ea8912764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x556ea89955ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x556ea89ebb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x556ea89ebb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x556ea89ebb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x556ea89e31ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x556ea89e31ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x556ea8a1d535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x556ea8a0efb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x556ea8b1f834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x556ea89d48ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x556ea89d48ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x556ea89d48ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f0460a29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136918==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000021,sig:06,src:000483,time:784114,execs:731365,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136920==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55dabe3e96d1 bp 0x7fffe63d1710 sp 0x7fffe63d0ed8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55dabe3e96d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55dabe61761f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55dabe61761f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55dabe48f6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55dabe48eb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f93ed029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f93ed029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55dabe3cc764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55dabe44f5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55dabe4a5b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55dabe4a5b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55dabe4a5b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55dabe49d1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55dabe49d1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55dabe4d7535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55dabe4c8fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55dabe5d9834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55dabe48e8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55dabe48e8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55dabe48e8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f93ed029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136920==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000022,sig:06,src:000481,time:793974,execs:740899,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136922==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55b1fe4a06d1 bp 0x7ffe1f455d30 sp 0x7ffe1f4554f8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55b1fe4a06d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55b1fe6ce61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55b1fe6ce61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55b1fe5466ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55b1fe545b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fd697429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fd697429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55b1fe483764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55b1fe5065ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55b1fe55cb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55b1fe55cb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55b1fe55cb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55b1fe5541ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55b1fe5541ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55b1fe58e535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55b1fe57ffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55b1fe690834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55b1fe5458ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55b1fe5458ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55b1fe5458ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fd697429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136922==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000023,sig:06,src:000486,time:796112,execs:743092,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 444 (0x1bc) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect value for "PageName"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136924==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x607000000141 at pc 0x55fe17c3a6d1 bp 0x7fffd904ab50 sp 0x7fffd904a318
+READ of size 66 at 0x607000000141 thread T0
+    #0 0x55fe17c3a6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55fe17e6861f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55fe17e6861f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55fe17ce06ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55fe17cdfb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7ff45d629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7ff45d629e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55fe17c1d764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x607000000141 is located 0 bytes to the right of 65-byte region [0x607000000100,0x607000000141)
+allocated by thread T0 here:
+    #0 0x55fe17ca05ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55fe17cf6b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55fe17cf6b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55fe17cf6b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55fe17cee1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55fe17cee1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55fe17d28535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55fe17d19fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55fe17e2a834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55fe17cdf8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55fe17cdf8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55fe17cdf8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7ff45d629d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+  0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00 00 fa fa fa fa fa
+=>0x0c0e7fff8020: 00 00 00 00 00 00 00 00[01]fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136924==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000024,sig:06,src:000488,time:802907,execs:750088,op:havoc,rep:5
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136926==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55bf8b4d16d1 bp 0x7ffe4ae49330 sp 0x7ffe4ae48af8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55bf8b4d16d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55bf8b6ff61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55bf8b6ff61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55bf8b5776ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55bf8b576b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fb2dc829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fb2dc829e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55bf8b4b4764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55bf8b5375ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55bf8b58db86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55bf8b58db86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55bf8b58db86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55bf8b5851ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55bf8b5851ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55bf8b5bf535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55bf8b5b0fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55bf8b6c1834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55bf8b5768ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55bf8b5768ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55bf8b5768ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fb2dc829d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136926==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000025,sig:06,src:000489,time:806014,execs:752315,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, Incorrect count for "ColorMap"; tag ignored.
+TIFFReadDirectory: Warning, Bogus "StripByteCounts" field, ignoring and calculating from imagelength.
+=================================================================
+==1136928==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60300000014d at pc 0x55986958f6d1 bp 0x7fffa7fe0290 sp 0x7fffa7fdfa58
+READ of size 30 at 0x60300000014d thread T0
+    #0 0x55986958f6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5598697bd61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5598697bd61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5598696356ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x559869634b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f7adaa29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f7adaa29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x559869572764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x60300000014d is located 0 bytes to the right of 29-byte region [0x603000000130,0x60300000014d)
+allocated by thread T0 here:
+    #0 0x5598695f55ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55986964bb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55986964bb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55986964bb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5598696431ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5598696431ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55986967d535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55986966efb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55986977f834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5598696348ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5598696348ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5598696348ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f7adaa29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c067fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c067fff8000: fa fa 00 00 00 fa fa fa 00 00 00 00 fa fa fd fd
+  0x0c067fff8010: fd fa fa fa fd fd fd fa fa fa 00 00 03 fa fa fa
+=>0x0c067fff8020: fd fd fd fd fa fa 00 00 00[05]fa fa fa fa fa fa
+  0x0c067fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c067fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136928==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000026,sig:06,src:000502,time:873729,execs:813492,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 21 (0x15) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 59688 (0xe928) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 20 (0x14) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 10 (0xa) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 1 (0x1) encountered.
+TIFFFetchNormalTag: Warning, IO error during reading of "ImageDescription"; tag ignored.
+TIFFFetchNormalTag: Warning, Incompatible type for "SubIFD"; tag ignored.
+TIFFFetchNormalTag: Warning, IO error during reading of "Software"; tag ignored.
+TIFFFetchNormalTag: Warning, IO error during reading of "Tag 20"; tag ignored.
+TIFFFetchNormalTag: Warning, IO error during reading of "Tag 10"; tag ignored.
+=================================================================
+==1136930==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000d1 at pc 0x56198c5856d1 bp 0x7ffe99050050 sp 0x7ffe9904f818
+READ of size 2 at 0x6020000000d1 thread T0
+    #0 0x56198c5856d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x56198c7b361f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x56198c7b361f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x56198c62b6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x56198c62ab7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f3c66229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f3c66229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x56198c568764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000d1 is located 0 bytes to the right of 1-byte region [0x6020000000d0,0x6020000000d1)
+allocated by thread T0 here:
+    #0 0x56198c5eb5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x56198c641b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x56198c641b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x56198c641b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x56198c6391ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x56198c6391ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x56198c673535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x56198c664fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x56198c775834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x56198c62a8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x56198c62a8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x56198c62a8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f3c66229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa fd fd
+=>0x0c047fff8010: fa fa 00 fa fa fa fd fa fa fa[01]fa fa fa fd fa
+  0x0c047fff8020: fa fa fd fd fa fa 00 fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136930==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000027,sig:06,src:000516,time:951390,execs:881885,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect value for "CFAPlaneColor"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136932==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5613ff31c6d1 bp 0x7ffe959ac7b0 sp 0x7ffe959abf78
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5613ff31c6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5613ff54a61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5613ff54a61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5613ff3c26ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5613ff3c1b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fcd66229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fcd66229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5613ff2ff764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x5613ff3825ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5613ff3d8b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5613ff3d8b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5613ff3d8b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5613ff3d01ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5613ff3d01ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5613ff40a535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5613ff3fbfb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5613ff50c834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5613ff3c18ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5613ff3c18ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5613ff3c18ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fcd66229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136932==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000028,sig:06,src:000518,time:958889,execs:889285,op:havoc,rep:3
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect value for "CFAPlaneColor"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "PageName" does not end in null byte.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136934==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x607000000141 at pc 0x560587d5e6d1 bp 0x7ffd5d682590 sp 0x7ffd5d681d58
+READ of size 66 at 0x607000000141 thread T0
+    #0 0x560587d5e6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x560587f8c61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x560587f8c61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x560587e046ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x560587e03b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f1ea3c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f1ea3c29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x560587d41764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x607000000141 is located 0 bytes to the right of 65-byte region [0x607000000100,0x607000000141)
+allocated by thread T0 here:
+    #0 0x560587dc45ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x560587e1ab86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x560587e1ab86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x560587e1ab86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x560587e121ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x560587e121ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x560587e4c535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x560587e3dfb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x560587f4e834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x560587e038ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x560587e038ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x560587e038ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f1ea3c29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+  0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00 00 fa fa fa fa fa
+=>0x0c0e7fff8020: 00 00 00 00 00 00 00 00[01]fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136934==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000029,sig:06,src:000520,time:962622,execs:893047,op:havoc,rep:10
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 65535 (0xffff) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "CFAPlaneColor"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+TIFFReadDirectory: Warning, IO error during reading of "ColorMap"; tag ignored.
+=================================================================
+==1136936==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5590989b26d1 bp 0x7ffd2626dcb0 sp 0x7ffd2626d478
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5590989b26d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x559098be061f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x559098be061f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x559098a586ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x559098a57b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7ff21dc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7ff21dc29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x559098995764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x559098a185ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x559098a6eb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x559098a6eb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x559098a6eb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x559098a661ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x559098a661ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x559098aa0535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x559098a91fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x559098ba2834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x559098a578ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x559098a578ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x559098a578ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7ff21dc29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136936==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000030,sig:06,src:000319,time:1013830,execs:939597,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136938==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x5555f631f6d1 bp 0x7ffdaa9ab470 sp 0x7ffdaa9aac38
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x5555f631f6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5555f654d61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5555f654d61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5555f63c56ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5555f63c4b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fceb7029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fceb7029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5555f6302764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x5555f63855ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5555f63dbb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5555f63dbb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5555f63dbb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5555f63d31ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5555f63d31ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5555f640d535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5555f63fefb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5555f650f834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5555f63c48ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5555f63c48ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5555f63c48ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fceb7029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136938==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000031,sig:06,src:000519,time:1017169,execs:943165,op:havoc,rep:8
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, ASCII value for tag "DocumentName" does not end in null byte.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136940==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x607000000141 at pc 0x555a20bbf6d1 bp 0x7fff2dcf1930 sp 0x7fff2dcf10f8
+READ of size 66 at 0x607000000141 thread T0
+    #0 0x555a20bbf6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x555a20ded61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x555a20ded61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x555a20c656ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x555a20c64b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7faa9a229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7faa9a229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x555a20ba2764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x607000000141 is located 0 bytes to the right of 65-byte region [0x607000000100,0x607000000141)
+allocated by thread T0 here:
+    #0 0x555a20c255ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x555a20c7bb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x555a20c7bb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x555a20c7bb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x555a20c731ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x555a20c731ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x555a20cad535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x555a20c9efb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x555a20daf834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x555a20c648ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x555a20c648ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x555a20c648ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7faa9a229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+  0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00 00 fa fa fa fa fa
+=>0x0c0e7fff8020: 00 00 00 00 00 00 00 00[01]fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136940==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000032,sig:06,src:000488,time:1037867,execs:962968,op:havoc,rep:5
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136942==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x55e042f0e6d1 bp 0x7ffdfeca0490 sp 0x7ffdfec9fc58
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x55e042f0e6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55e04313c61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55e04313c61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55e042fb46ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55e042fb3b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fbe3ec29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fbe3ec29e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55e042ef1764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x55e042f745ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55e042fcab86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55e042fcab86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55e042fcab86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55e042fc21ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55e042fc21ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55e042ffc535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55e042fedfb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55e0430fe834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55e042fb38ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55e042fb38ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55e042fb38ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fbe3ec29d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136942==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000033,sig:06,src:000490,time:1111148,execs:1008364,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 32817 (0x8031) encountered.
+TIFFFetchNormalTag: Warning, Incorrect value for "PhotometricInterpretation"; tag ignored.
+TIFFFetchNormalTag: Warning, Incorrect count for "ResolutionUnit"; tag ignored.
+=================================================================
+==1136944==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6070000000d1 at pc 0x558cd5f266d1 bp 0x7fff8948a830 sp 0x7fff89489ff8
+READ of size 66 at 0x6070000000d1 thread T0
+    #0 0x558cd5f266d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x558cd615461f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x558cd615461f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x558cd5fcc6ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x558cd5fcbb7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f8135229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f8135229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x558cd5f09764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6070000000d1 is located 0 bytes to the right of 65-byte region [0x607000000090,0x6070000000d1)
+allocated by thread T0 here:
+    #0 0x558cd5f8c5ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x558cd5fe2b86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x558cd5fe2b86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x558cd5fe2b86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x558cd5fda1ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x558cd5fda1ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x558cd6014535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x558cd6005fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x558cd6116834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x558cd5fcb8ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x558cd5fcb8ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x558cd5fcb8ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f8135229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c0e7fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c0e7fff8000: fa fa fa fa fd fd fd fd fd fd fd fd fd fa fa fa
+=>0x0c0e7fff8010: fa fa 00 00 00 00 00 00 00 00[01]fa fa fa fa fa
+  0x0c0e7fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c0e7fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136944==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000034,sig:06,src:000000,time:1231745,execs:1108804,op:havoc,rep:9
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 64003 (0xfa03) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 5376 (0x1500) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 4096 (0x1000) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 236 (0xec) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 34173 (0x857d) encountered.
+TIFFReadDirectory: Warning, TIFF directory is missing required "StripByteCounts" field, calculating from imagelength.
+=================================================================
+==1136946==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000071 at pc 0x5615e9f0e6d1 bp 0x7ffea54ba610 sp 0x7ffea54b9dd8
+READ of size 2 at 0x602000000071 thread T0
+    #0 0x5615e9f0e6d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5615ea13c61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5615ea13c61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5615e9fb46ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5615e9fb3b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7fd738029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7fd738029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5615e9ef1764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x602000000071 is located 0 bytes to the right of 1-byte region [0x602000000070,0x602000000071)
+allocated by thread T0 here:
+    #0 0x5615e9f745ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5615e9fcab86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5615e9fcab86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5615e9fcab86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5615e9fc21ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5615e9fc21ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5615e9ffc535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5615e9fedfb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5615ea0fe834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5615e9fb38ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5615e9fb38ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5615e9fb38ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7fd738029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa[01]fa
+  0x0c047fff8010: fa fa fd fa fa fa 00 fa fa fa 00 fa fa fa fa fa
+  0x0c047fff8020: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136946==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000035,sig:06,src:000000,time:1232167,execs:1109211,op:havoc,rep:2
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 58389 (0xe415) encountered.
+=================================================================
+==1136948==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000b1 at pc 0x5578f31736d1 bp 0x7fffacf7f770 sp 0x7fffacf7ef38
+READ of size 2 at 0x6020000000b1 thread T0
+    #0 0x5578f31736d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5578f33a161f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5578f33a161f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5578f32196ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5578f3218b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f945b229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f945b229e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5578f3156764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000b1 is located 0 bytes to the right of 1-byte region [0x6020000000b0,0x6020000000b1)
+allocated by thread T0 here:
+    #0 0x5578f31d95ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5578f322fb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5578f322fb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5578f322fb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5578f32271ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5578f32271ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5578f3261535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5578f3252fb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5578f3363834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5578f32188ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5578f32188ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5578f32188ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f945b229d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 00 fa
+=>0x0c047fff8010: fa fa fd fa fa fa[01]fa fa fa fd fa fa fa 00 fa
+  0x0c047fff8020: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136948==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000036,sig:06,src:000000,time:1241298,execs:1116437,op:havoc,rep:4
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 65052 (0xfe1c) encountered.
+=================================================================
+==1136950==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000f1 at pc 0x5566ab2006d1 bp 0x7ffd10133b50 sp 0x7ffd10133318
+READ of size 2 at 0x6020000000f1 thread T0
+    #0 0x5566ab2006d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x5566ab42e61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x5566ab42e61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x5566ab2a66ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x5566ab2a5b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f02ae429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f02ae429e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x5566ab1e3764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000f1 is located 0 bytes to the right of 1-byte region [0x6020000000f0,0x6020000000f1)
+allocated by thread T0 here:
+    #0 0x5566ab2665ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x5566ab2bcb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x5566ab2bcb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x5566ab2bcb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x5566ab2b41ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x5566ab2b41ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x5566ab2ee535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x5566ab2dffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x5566ab3f0834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x5566ab2a58ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x5566ab2a58ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x5566ab2a58ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f02ae429d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 00 fa
+=>0x0c047fff8010: fa fa fd fa fa fa 00 fa fa fa fd fa fa fa[01]fa
+  0x0c047fff8020: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136950==ABORTING
+Input : /home/fuzz/project/fuzzing_libtiff/output/default/crashes/id:000037,sig:06,src:000000,time:1244633,execs:1119491,op:havoc,rep:7
+TIFFReadDirectoryCheckOrder: Warning, Invalid TIFF directory; tags are not sorted in ascending order.
+TIFFReadDirectory: Warning, Unknown field with tag 58921 (0xe629) encountered.
+TIFFReadDirectory: Warning, Unknown field with tag 363 (0x16b) encountered.
+TIFFFetchNormalTag: Warning, IO error during reading of "Tag 363"; tag ignored.
+=================================================================
+==1136952==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000b1 at pc 0x55ec9b8b06d1 bp 0x7ffc306eccd0 sp 0x7ffc306ec498
+READ of size 2 at 0x6020000000b1 thread T0
+    #0 0x55ec9b8b06d0 in fputs (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209)
+    #1 0x55ec9bade61f in _TIFFPrintField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:127:4
+    #2 0x55ec9bade61f in TIFFPrintDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_print.c:641:5
+    #3 0x55ec9b9566ad in tiffinfo /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:449:2
+    #4 0x55ec9b955b7b in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:152:6
+    #5 0x7f13a3029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #6 0x7f13a3029e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #7 0x55ec9b893764 in _start (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xbd764) (BuildId: dc1b4e1c29b82209)
+
+0x6020000000b1 is located 0 bytes to the right of 1-byte region [0x6020000000b0,0x6020000000b1)
+allocated by thread T0 here:
+    #0 0x55ec9b9165ae in malloc (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0x1405ae) (BuildId: dc1b4e1c29b82209)
+    #1 0x55ec9b96cb86 in _TIFFmalloc /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:283:10
+    #2 0x55ec9b96cb86 in setByteArray /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:51:19
+    #3 0x55ec9b96cb86 in _TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:539:4
+    #4 0x55ec9b9641ec in TIFFVSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:820:6
+    #5 0x55ec9b9641ec in TIFFSetField /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dir.c:764:11
+    #6 0x55ec9b99e535 in TIFFFetchNormalTag /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:5164:8
+    #7 0x55ec9b98ffb3 in TIFFReadDirectory /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_dirread.c:3810:12
+    #8 0x55ec9baa0834 in TIFFClientOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_open.c:466:8
+    #9 0x55ec9b9558ee in TIFFFdOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:178:8
+    #10 0x55ec9b9558ee in TIFFOpen /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/libtiff/tif_unix.c:217:8
+    #11 0x55ec9b9558ee in main /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/tools/tiffinfo.c:140:9
+    #12 0x7f13a3029d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/fuzz/project/fuzzing_libtiff/install/bin/tiffinfo+0xda6d0) (BuildId: dc1b4e1c29b82209) in fputs
+Shadow bytes around the buggy address:
+  0x0c047fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c047fff8000: fa fa 00 00 fa fa fd fa fa fa fd fa fa fa 00 fa
+=>0x0c047fff8010: fa fa fd fa fa fa[01]fa fa fa fd fa fa fa 00 fa
+  0x0c047fff8020: fa fa fd fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8030: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1136952==ABORTING
