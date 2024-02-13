@@ -65,74 +65,80 @@ configure:3349: result: yes
 configure:3476: checking whether to enable maintainer-specific portions of Makefiles
 configure:3485: result: no
 configure:3580: checking for gcc
-configure:3607: result: afl-clang-lto
+configure:3596: found /usr/bin/gcc
+configure:3607: result: gcc
 configure:3836: checking for C compiler version
-configure:3845: afl-clang-lto --version >&5
-Ubuntu clang version 14.0.0-1ubuntu1.1
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-InstalledDir: /usr/lib/llvm-14/bin
+configure:3845: gcc --version >&5
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
 configure:3856: $? = 0
-configure:3845: afl-clang-lto -v >&5
-Ubuntu clang version 14.0.0-1ubuntu1.1
-Target: x86_64-pc-linux-gnu
+configure:3845: gcc -v >&5
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-XeT9lY/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
 Thread model: posix
-InstalledDir: /usr/lib/llvm-14/bin
-Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11
-Selected GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11
-Candidate multilib: .;@m64
-Selected multilib: .;@m64
- "/usr/lib/llvm-14/bin/ld.lld" -pie -z relro --hash-style=gnu --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o a.out /lib/x86_64-linux-gnu/Scrt1.o /lib/x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/11/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/11 -L/usr/lib/gcc/x86_64-linux-gnu/11/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/lib/llvm-14/bin/../lib -L/lib -L/usr/lib -plugin-opt=mcpu=x86-64 -plugin-opt=O3 --whole-archive /usr/lib/llvm-14/lib/clang/14.0.0/lib/linux/libclang_rt.asan_static-x86_64.a --no-whole-archive --whole-archive /usr/lib/llvm-14/lib/clang/14.0.0/lib/linux/libclang_rt.asan-x86_64.a --no-whole-archive --dynamic-list=/usr/lib/llvm-14/lib/clang/14.0.0/lib/linux/libclang_rt.asan-x86_64.a.syms --lto-legacy-pass-manager -mllvm=-load=/usr/local/bin/../lib/afl/SanitizerCoverageLTO.so --allow-multiple-definition --no-as-needed -lpthread -lrt -lm -ldl -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-linux-gnu/11/crtendS.o /lib/x86_64-linux-gnu/crtn.o
-ld.lld: error: undefined symbol: main
+Supported LTO compression algorithms: zlib zstd
+gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
 ... rest of stderr output deleted ...
+configure:3856: $? = 0
+configure:3845: gcc -V >&5
+gcc: error: unrecognized command-line option '-V'
+gcc: fatal error: no input files
+compilation terminated.
 configure:3856: $? = 1
-configure:3845: afl-clang-lto -V >&5
-clang: error: unsupported option '-V -U_FORTIFY_SOURCE'
-configure:3856: $? = 1
-configure:3845: afl-clang-lto -qversion >&5
-clang: error: unknown argument '-qversion'; did you mean '--version'?
+configure:3845: gcc -qversion >&5
+gcc: error: unrecognized command-line option '-qversion'; did you mean '--version'?
+gcc: fatal error: no input files
+compilation terminated.
 configure:3856: $? = 1
 configure:3876: checking whether the C compiler works
-configure:3898: afl-clang-lto    conftest.c  >&5
+configure:3898: gcc --coverage  --coverage conftest.c  >&5
 configure:3902: $? = 0
 configure:3950: result: yes
 configure:3953: checking for C compiler default output file name
 configure:3955: result: a.out
 configure:3961: checking for suffix of executables
-configure:3968: afl-clang-lto -o conftest    conftest.c  >&5
+configure:3968: gcc -o conftest --coverage  --coverage conftest.c  >&5
 configure:3972: $? = 0
 configure:3994: result: 
 configure:4016: checking whether we are cross compiling
-configure:4024: afl-clang-lto -o conftest    conftest.c  >&5
+configure:4024: gcc -o conftest --coverage  --coverage conftest.c  >&5
 configure:4028: $? = 0
 configure:4035: ./conftest
 configure:4039: $? = 0
 configure:4054: result: no
 configure:4059: checking for suffix of object files
-configure:4081: afl-clang-lto -c   conftest.c >&5
+configure:4081: gcc -c --coverage  conftest.c >&5
 configure:4085: $? = 0
 configure:4106: result: o
 configure:4110: checking whether we are using the GNU C compiler
-configure:4129: afl-clang-lto -c   conftest.c >&5
+configure:4129: gcc -c --coverage  conftest.c >&5
 configure:4129: $? = 0
 configure:4138: result: yes
-configure:4147: checking whether afl-clang-lto accepts -g
-configure:4167: afl-clang-lto -c -g  conftest.c >&5
+configure:4147: checking whether gcc accepts -g
+configure:4167: gcc -c -g  conftest.c >&5
 configure:4167: $? = 0
 configure:4208: result: yes
-configure:4225: checking for afl-clang-lto option to accept ISO C89
-configure:4288: afl-clang-lto  -c -g -O2  conftest.c >&5
+configure:4225: checking for gcc option to accept ISO C89
+configure:4288: gcc  -c --coverage  conftest.c >&5
 configure:4288: $? = 0
 configure:4301: result: none needed
-configure:4326: checking whether afl-clang-lto understands -c and -o together
-configure:4348: afl-clang-lto -c conftest.c -o conftest2.o
+configure:4326: checking whether gcc understands -c and -o together
+configure:4348: gcc -c conftest.c -o conftest2.o
 configure:4351: $? = 0
-configure:4348: afl-clang-lto -c conftest.c -o conftest2.o
+configure:4348: gcc -c conftest.c -o conftest2.o
 configure:4351: $? = 0
 configure:4363: result: yes
 configure:4391: checking for style of include used by make
 configure:4419: result: GNU
-configure:4445: checking dependency style of afl-clang-lto
+configure:4445: checking dependency style of gcc
 configure:4556: result: gcc3
 configure:4580: checking for C compiler warning flags
 configure:4672: result: -Wall -W
@@ -148,21 +154,17 @@ configure:4991: checking for egrep
 configure:5053: result: /usr/bin/grep -E
 configure:5058: checking for fgrep
 configure:5120: result: /usr/bin/grep -F
-configure:5155: checking for ld used by afl-clang-lto
+configure:5155: checking for ld used by gcc
 configure:5222: result: /usr/bin/ld
 configure:5229: checking if the linker (/usr/bin/ld) is GNU ld
 configure:5244: result: yes
 configure:5256: checking for BSD- or MS-compatible name lister (nm)
 configure:5310: result: /usr/bin/nm -B
 configure:5440: checking the name lister (/usr/bin/nm -B) interface
-configure:5447: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:5447: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:5450: /usr/bin/nm -B "conftest.o"
 configure:5453: output
-         U __asan_init
-         U __asan_register_globals
-         U __asan_unregister_globals
-         U __asan_version_mismatch_check_v8
-00000000 T some_variable
+0000000000000000 B some_variable
 configure:5460: result: BSD nm
 configure:5464: checking the maximum length of command line arguments
 configure:5595: result: 1572864
@@ -185,7 +187,7 @@ configure:6283: checking for ar
 configure:6299: found /usr/bin/ar
 configure:6310: result: ar
 configure:6347: checking for archiver @FILE support
-configure:6364: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:6364: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:6364: $? = 0
 configure:6367: ar cru libconftest.a @conftest.lst >&5
 ar: `u' modifier ignored since `D' is the default (see `U')
@@ -201,12 +203,12 @@ configure:6475: result: strip
 configure:6547: checking for ranlib
 configure:6563: found /usr/bin/ranlib
 configure:6574: result: ranlib
-configure:6676: checking command to parse /usr/bin/nm -B output from afl-clang-lto object
-configure:6829: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:6676: checking command to parse /usr/bin/nm -B output from gcc object
+configure:6829: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:6832: $? = 0
 configure:6836: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ ]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ ][ ]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' | sed '/ __gnu_lto/d' \> conftest.nm
 configure:6839: $? = 0
-configure:6905: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c conftstm.o >&5
+configure:6905: gcc -o conftest --coverage -Wall -W  --coverage conftest.c conftstm.o >&5
 configure:6908: $? = 0
 configure:6946: result: ok
 configure:6993: checking for sysroot
@@ -215,7 +217,7 @@ configure:7030: checking for a working dd
 configure:7068: result: /usr/bin/dd
 configure:7072: checking how to truncate binary pipes
 configure:7087: result: /usr/bin/dd bs=4096 count=1
-configure:7208: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:7208: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:7211: $? = 0
 configure:7401: checking for mt
 configure:7417: found /usr/bin/mt
@@ -224,13 +226,13 @@ configure:7451: checking if mt is a manifest tool
 configure:7457: mt '-?'
 configure:7465: result: no
 configure:8107: checking how to run the C preprocessor
-configure:8138: afl-clang-lto -E  conftest.c
+configure:8138: gcc -E  conftest.c
 configure:8138: $? = 0
-configure:8152: afl-clang-lto -E  conftest.c
-conftest.c:11:10: fatal error: 'ac_nonexistent.h' file not found
-#include <ac_nonexistent.h>
-         ^~~~~~~~~~~~~~~~~~
-1 error generated.
+configure:8152: gcc -E  conftest.c
+conftest.c:11:10: fatal error: ac_nonexistent.h: No such file or directory
+   11 | #include <ac_nonexistent.h>
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
 configure:8152: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -244,14 +246,14 @@ configure: failed program was:
 | #define VERSION "4.0.4"
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
-configure:8177: result: afl-clang-lto -E
-configure:8197: afl-clang-lto -E  conftest.c
+configure:8177: result: gcc -E
+configure:8197: gcc -E  conftest.c
 configure:8197: $? = 0
-configure:8211: afl-clang-lto -E  conftest.c
-conftest.c:11:10: fatal error: 'ac_nonexistent.h' file not found
-#include <ac_nonexistent.h>
-         ^~~~~~~~~~~~~~~~~~
-1 error generated.
+configure:8211: gcc -E  conftest.c
+conftest.c:11:10: fatal error: ac_nonexistent.h: No such file or directory
+   11 | #include <ac_nonexistent.h>
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
 configure:8211: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -266,77 +268,78 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:8240: checking for ANSI C header files
-configure:8260: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8260: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8260: $? = 0
-configure:8333: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c  >&5
+configure:8333: gcc -o conftest --coverage -Wall -W  --coverage conftest.c  >&5
 configure:8333: $? = 0
 configure:8333: ./conftest
 configure:8333: $? = 0
 configure:8344: result: yes
 configure:8357: checking for sys/types.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for sys/stat.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for stdlib.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for string.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for memory.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for strings.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for inttypes.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for stdint.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8357: checking for unistd.h
-configure:8357: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8357: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8357: $? = 0
 configure:8357: result: yes
 configure:8371: checking for dlfcn.h
-configure:8371: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:8371: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:8371: $? = 0
 configure:8371: result: yes
 configure:8925: checking for objdir
 configure:8940: result: .libs
-configure:9211: checking if afl-clang-lto supports -fno-rtti -fno-exceptions
-configure:9229: afl-clang-lto -c -g -O2 -Wall -W  -fno-rtti -fno-exceptions conftest.c >&5
+configure:9211: checking if gcc supports -fno-rtti -fno-exceptions
+configure:9229: gcc -c --coverage -Wall -W  -fno-rtti -fno-exceptions conftest.c >&5
+cc1: warning: command-line option '-fno-rtti' is valid for C++/D/ObjC++ but not for C
 configure:9233: $? = 0
-configure:9246: result: yes
-configure:9604: checking for afl-clang-lto option to produce PIC
+configure:9246: result: no
+configure:9604: checking for gcc option to produce PIC
 configure:9611: result: -fPIC -DPIC
-configure:9619: checking if afl-clang-lto PIC flag -fPIC -DPIC works
-configure:9637: afl-clang-lto -c -g -O2 -Wall -W  -fPIC -DPIC -DPIC conftest.c >&5
+configure:9619: checking if gcc PIC flag -fPIC -DPIC works
+configure:9637: gcc -c --coverage -Wall -W  -fPIC -DPIC -DPIC conftest.c >&5
 configure:9641: $? = 0
 configure:9654: result: yes
-configure:9683: checking if afl-clang-lto static flag -static works
-configure:9711: result: no
-configure:9726: checking if afl-clang-lto supports -c -o file.o
-configure:9747: afl-clang-lto -c -g -O2 -Wall -W  -o out/conftest2.o conftest.c >&5
+configure:9683: checking if gcc static flag -static works
+configure:9711: result: yes
+configure:9726: checking if gcc supports -c -o file.o
+configure:9747: gcc -c --coverage -Wall -W  -o out/conftest2.o conftest.c >&5
 configure:9751: $? = 0
 configure:9773: result: yes
-configure:9781: checking if afl-clang-lto supports -c -o file.o
+configure:9781: checking if gcc supports -c -o file.o
 configure:9828: result: yes
-configure:9861: checking whether the afl-clang-lto linker (/usr/bin/ld) supports shared libraries
+configure:9861: checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
 configure:11120: result: yes
 configure:11360: checking dynamic linker characteristics
-configure:11937: afl-clang-lto -o conftest -g -O2 -Wall -W   -Wl,-rpath -Wl,/foo conftest.c  >&5
+configure:11937: gcc -o conftest --coverage -Wall -W  --coverage -Wl,-rpath -Wl,/foo conftest.c  >&5
 configure:11937: $? = 0
 configure:12169: result: GNU/Linux ld.so
 configure:12276: checking how to hardcode library paths into programs
@@ -460,10 +463,10 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:13636: checking for ld used by g++
-configure:13703: result: /usr/bin/ld
-configure:13710: checking if the linker (/usr/bin/ld) is GNU ld
+configure:13703: result: /usr/bin/ld -m elf_x86_64
+configure:13710: checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld
 configure:13725: result: yes
-configure:13780: checking whether the g++ linker (/usr/bin/ld) supports shared libraries
+configure:13780: checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
 configure:14853: result: yes
 configure:14889: g++ -c -g -O2  conftest.cpp >&5
 configure:14892: $? = 0
@@ -481,7 +484,7 @@ configure:15556: $? = 0
 configure:15578: result: yes
 configure:15583: checking if g++ supports -c -o file.o
 configure:15630: result: yes
-configure:15660: checking whether the g++ linker (/usr/bin/ld) supports shared libraries
+configure:15660: checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries
 configure:15700: result: yes
 configure:15841: checking dynamic linker characteristics
 configure:16577: result: GNU/Linux ld.so
@@ -490,40 +493,40 @@ configure:16655: result: immediate
 configure:16708: checking whether make supports nested variables
 configure:16725: result: yes
 configure:16744: checking for sin in -lm
-configure:16769: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm   >&5
-conftest.c:30:6: warning: incompatible redeclaration of library function 'sin' [-Wincompatible-library-redeclaration]
-char sin ();
-     ^
-conftest.c:30:6: note: 'sin' is a builtin with type 'double (double)'
-1 warning generated.
+configure:16769: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm   >&5
+conftest.c:30:6: warning: conflicting types for built-in function 'sin'; expected 'double(double)' [-Wbuiltin-declaration-mismatch]
+   30 | char sin ();
+      |      ^~~
+conftest.c:1:1: note: 'sin' is declared in header '<math.h>'
+    1 | /* confdefs.h */
 configure:16769: $? = 0
 configure:16778: result: yes
 configure:16796: checking assert.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking assert.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for assert.h
 configure:16796: result: yes
 configure:16796: checking fcntl.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking fcntl.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for fcntl.h
 configure:16796: result: yes
 configure:16796: checking io.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:58:10: fatal error: 'io.h' file not found
-#include <io.h>
-         ^~~~~~
-1 error generated.
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c:58:10: fatal error: io.h: No such file or directory
+   58 | #include <io.h>
+      |          ^~~~~~
+compilation terminated.
 configure:16796: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -586,11 +589,11 @@ configure: failed program was:
 | #include <io.h>
 configure:16796: result: no
 configure:16796: checking io.h presence
-configure:16796: afl-clang-lto -E  conftest.c
-conftest.c:25:10: fatal error: 'io.h' file not found
-#include <io.h>
-         ^~~~~~
-1 error generated.
+configure:16796: gcc -E  conftest.c
+conftest.c:25:10: fatal error: io.h: No such file or directory
+   25 | #include <io.h>
+      |          ^~~~~~
+compilation terminated.
 configure:16796: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -622,41 +625,41 @@ configure:16796: result: no
 configure:16796: checking for io.h
 configure:16796: result: no
 configure:16796: checking limits.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking limits.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for limits.h
 configure:16796: result: yes
 configure:16796: checking malloc.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking malloc.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for malloc.h
 configure:16796: result: yes
 configure:16796: checking search.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking search.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for search.h
 configure:16796: result: yes
 configure:16796: checking sys/time.h usability
-configure:16796: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16796: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking sys/time.h presence
-configure:16796: afl-clang-lto -E  conftest.c
+configure:16796: gcc -E  conftest.c
 configure:16796: $? = 0
 configure:16796: result: yes
 configure:16796: checking for sys/time.h
@@ -664,27 +667,22 @@ configure:16796: result: yes
 configure:16796: checking for unistd.h
 configure:16796: result: yes
 configure:16807: checking for an ANSI C-conforming const
-configure:16873: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16873: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16873: $? = 0
 configure:16880: result: yes
 configure:16888: checking for inline
-configure:16904: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:32:21: warning: unused function 'static_foo' [-Wunused-function]
-static inline foo_t static_foo () {return 0; }
-                    ^
-1 warning generated.
+configure:16904: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16904: $? = 0
 configure:16912: result: inline
 configure:16930: checking whether byte ordering is bigendian
-configure:16945: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:31:9: error: unknown type name 'not'
-               not a universal capable compiler
-               ^
-conftest.c:31:14: error: expected ';' after top level declarator
-               not a universal capable compiler
-                    ^
-                    ;
-2 errors generated.
+configure:16945: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c:31:16: error: unknown type name 'not'
+   31 |                not a universal capable compiler
+      |                ^~~
+conftest.c:31:22: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'universal'
+   31 |                not a universal capable compiler
+      |                      ^~~~~~~~~
+conftest.c:31:22: error: unknown type name 'universal'
 configure:16945: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -721,13 +719,17 @@ configure: failed program was:
 | 	     #endif
 | 	     typedef int dummy;
 | 
-configure:16990: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:16990: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:16990: $? = 0
-configure:17008: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:37:4: error: use of undeclared identifier 'not'
-                 not big endian
-                 ^
-1 error generated.
+configure:17008: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:37:18: error: unknown type name 'not'; did you mean 'ino_t'?
+   37 |                  not big endian
+      |                  ^~~
+      |                  ino_t
+conftest.c:37:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'endian'
+   37 |                  not big endian
+      |                          ^~~~~~
 configure:17008: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -774,13 +776,13 @@ configure: failed program was:
 | }
 configure:17136: result: no
 configure:17154: checking for off_t
-configure:17154: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17154: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17154: $? = 0
-configure:17154: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:66:20: error: expected expression
-if (sizeof ((off_t)))
-                   ^
-1 error generated.
+configure:17154: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:66:20: error: expected expression before ')' token
+   66 | if (sizeof ((off_t)))
+      |                    ^
 configure:17154: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -855,13 +857,13 @@ configure: failed program was:
 | }
 configure:17154: result: yes
 configure:17165: checking for size_t
-configure:17165: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17165: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17165: $? = 0
-configure:17165: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:66:21: error: expected expression
-if (sizeof ((size_t)))
-                    ^
-1 error generated.
+configure:17165: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:66:21: error: expected expression before ')' token
+   66 | if (sizeof ((size_t)))
+      |                     ^
 configure:17165: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -936,75 +938,84 @@ configure: failed program was:
 | }
 configure:17165: result: yes
 configure:17176: checking whether time.h and sys/time.h may both be included
-configure:17196: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17196: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17196: $? = 0
 configure:17203: result: yes
 configure:17211: checking whether struct tm is in sys/time.h or time.h
-configure:17231: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17231: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17231: $? = 0
 configure:17238: result: time.h
 configure:17247: checking whether optarg is declared
-configure:17247: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17247: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17247: $? = 0
 configure:17247: result: yes
 configure:17265: checking size of signed short
-configure:17270: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17270: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17270: $? = 0
 configure:17270: ./conftest
 configure:17270: $? = 0
 configure:17284: result: 2
 configure:17300: checking size of unsigned short
-configure:17305: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17305: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17305: $? = 0
 configure:17305: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17305: $? = 0
 configure:17319: result: 2
 configure:17335: checking size of signed int
-configure:17340: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17340: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17340: $? = 0
 configure:17340: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17340: $? = 0
 configure:17354: result: 4
 configure:17370: checking size of unsigned int
-configure:17375: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17375: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17375: $? = 0
 configure:17375: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17375: $? = 0
 configure:17389: result: 4
 configure:17405: checking size of signed long
-configure:17410: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17410: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17410: $? = 0
 configure:17410: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17410: $? = 0
 configure:17424: result: 8
 configure:17440: checking size of unsigned long
-configure:17445: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17445: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17445: $? = 0
 configure:17445: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17445: $? = 0
 configure:17459: result: 8
 configure:17476: checking size of signed long long
-configure:17481: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17481: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17481: $? = 0
 configure:17481: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17481: $? = 0
 configure:17495: result: 8
 configure:17513: checking size of unsigned long long
-configure:17518: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17518: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17518: $? = 0
 configure:17518: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17518: $? = 0
 configure:17532: result: 8
 configure:17550: checking size of unsigned char *
-configure:17555: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17555: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17555: $? = 0
 configure:17555: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17555: $? = 0
 configure:17569: result: 8
 configure:17586: checking size of size_t
-configure:17591: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17591: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17591: $? = 0
 configure:17591: ./conftest
+libgcov profiling error:/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.gcda:overwriting an existing profile data with a different timestamp
 configure:17591: $? = 0
 configure:17605: result: 8
 configure:17616: checking for signed 8-bit type
@@ -1028,13 +1039,13 @@ configure:17812: result: "%lu"
 configure:17826: checking for signed size type
 configure:17851: result: signed long
 configure:17869: checking for ptrdiff_t
-configure:17869: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:17869: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:17869: $? = 0
-configure:17869: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:94:24: error: expected expression
-if (sizeof ((ptrdiff_t)))
-                       ^
-1 error generated.
+configure:17869: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:94:24: error: expected expression before ')' token
+   94 | if (sizeof ((ptrdiff_t)))
+      |                        ^
 configure:17869: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1139,15 +1150,13 @@ configure:17869: result: yes
 configure:17879: checking for pointer difference type
 configure:17881: result: ptrdiff_t
 configure:17894: checking for int8
-configure:17894: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:69:13: error: use of undeclared identifier 'int8'; did you mean 'int'?
-if (sizeof (int8))
-            ^~~~
-            int
-conftest.c:69:12: error: reference to overloaded function could not be resolved; did you mean to call it?
-if (sizeof (int8))
-           ^~~~~~
-2 errors generated.
+configure:17894: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:69:13: error: 'int8' undeclared (first use in this function); did you mean 'int'?
+   69 | if (sizeof (int8))
+      |             ^~~~
+      |             int
+conftest.c:69:13: note: each undeclared identifier is reported only once for each function it appears in
 configure:17894: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1225,11 +1234,13 @@ configure: failed program was:
 | }
 configure:17894: result: no
 configure:17908: checking for int16
-configure:17908: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:69:13: error: use of undeclared identifier 'int16'
-if (sizeof (int16))
-            ^
-1 error generated.
+configure:17908: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:69:13: error: 'int16' undeclared (first use in this function); did you mean 'int16_t'?
+   69 | if (sizeof (int16))
+      |             ^~~~~
+      |             int16_t
+conftest.c:69:13: note: each undeclared identifier is reported only once for each function it appears in
 configure:17908: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1307,11 +1318,13 @@ configure: failed program was:
 | }
 configure:17908: result: no
 configure:17922: checking for int32
-configure:17922: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:69:13: error: use of undeclared identifier 'int32'
-if (sizeof (int32))
-            ^
-1 error generated.
+configure:17922: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:69:13: error: 'int32' undeclared (first use in this function); did you mean 'int32_t'?
+   69 | if (sizeof (int32))
+      |             ^~~~~
+      |             int32_t
+conftest.c:69:13: note: each undeclared identifier is reported only once for each function it appears in
 configure:17922: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1389,55 +1402,61 @@ configure: failed program was:
 | }
 configure:17922: result: no
 configure:17942: checking for floor
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:83:6: warning: incompatible redeclaration of library function 'floor' [-Wincompatible-library-redeclaration]
-char floor ();
-     ^
-conftest.c:83:6: note: 'floor' is a builtin with type 'double (double)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:83:6: warning: conflicting types for built-in function 'floor'; expected 'double(double)' [-Wbuiltin-declaration-mismatch]
+   83 | char floor ();
+      |      ^~~~~
+conftest.c:71:1: note: 'floor' is declared in header '<math.h>'
+   70 | # include <limits.h>
+   71 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for isascii
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:84:6: warning: conflicting types for built-in function 'isascii'; expected 'int(int)' [-Wbuiltin-declaration-mismatch]
+   84 | char isascii ();
+      |      ^~~~~~~
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for memmove
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:85:6: warning: incompatible redeclaration of library function 'memmove' [-Wincompatible-library-redeclaration]
-char memmove ();
-     ^
-conftest.c:85:6: note: 'memmove' is a builtin with type 'void *(void *, const void *, unsigned long)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:85:6: warning: conflicting types for built-in function 'memmove'; expected 'void *(void *, const void *, long unsigned int)' [-Wbuiltin-declaration-mismatch]
+   85 | char memmove ();
+      |      ^~~~~~~
+conftest.c:73:1: note: 'memmove' is declared in header '<string.h>'
+   72 | # include <limits.h>
+   73 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for memset
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:86:6: warning: incompatible redeclaration of library function 'memset' [-Wincompatible-library-redeclaration]
-char memset ();
-     ^
-conftest.c:86:6: note: 'memset' is a builtin with type 'void *(void *, int, unsigned long)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:86:6: warning: conflicting types for built-in function 'memset'; expected 'void *(void *, int,  long unsigned int)' [-Wbuiltin-declaration-mismatch]
+   86 | char memset ();
+      |      ^~~~~~
+conftest.c:74:1: note: 'memset' is declared in header '<string.h>'
+   73 | # include <limits.h>
+   74 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for mmap
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for pow
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:88:6: warning: incompatible redeclaration of library function 'pow' [-Wincompatible-library-redeclaration]
-char pow ();
-     ^
-conftest.c:88:6: note: 'pow' is a builtin with type 'double (double, double)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:88:6: warning: conflicting types for built-in function 'pow'; expected 'double(double,  double)' [-Wbuiltin-declaration-mismatch]
+   88 | char pow ();
+      |      ^~~
+conftest.c:76:1: note: 'pow' is declared in header '<math.h>'
+   75 | # include <limits.h>
+   76 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for setmode
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-ld.lld: error: undefined symbol: setmode
->>> referenced by conftest.c:100 (/home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/conftest.c:100)
->>>               lto.tmp:(main)
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+/usr/bin/ld: /tmp/ccrqKNeD.o: in function `main':
+conftest.c:(.text+0x20): undefined reference to `setmode'
+collect2: error: ld returned 1 exit status
 configure:17942: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1545,75 +1564,72 @@ configure: failed program was:
 | }
 configure:17942: result: no
 configure:17942: checking for sqrt
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:89:6: warning: incompatible redeclaration of library function 'sqrt' [-Wincompatible-library-redeclaration]
-char sqrt ();
-     ^
-conftest.c:89:6: note: 'sqrt' is a builtin with type 'double (double)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:89:6: warning: conflicting types for built-in function 'sqrt'; expected 'double(double)' [-Wbuiltin-declaration-mismatch]
+   89 | char sqrt ();
+      |      ^~~~
+conftest.c:77:1: note: 'sqrt' is declared in header '<math.h>'
+   76 | # include <limits.h>
+   77 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for strchr
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:90:6: warning: incompatible redeclaration of library function 'strchr' [-Wincompatible-library-redeclaration]
-char strchr ();
-     ^
-conftest.c:90:6: note: 'strchr' is a builtin with type 'char *(const char *, int)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:90:6: warning: conflicting types for built-in function 'strchr'; expected 'char *(const char *, int)' [-Wbuiltin-declaration-mismatch]
+   90 | char strchr ();
+      |      ^~~~~~
+conftest.c:78:1: note: 'strchr' is declared in header '<string.h>'
+   77 | # include <limits.h>
+   78 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for strrchr
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:91:6: warning: incompatible redeclaration of library function 'strrchr' [-Wincompatible-library-redeclaration]
-char strrchr ();
-     ^
-conftest.c:91:6: note: 'strrchr' is a builtin with type 'char *(const char *, int)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:91:6: warning: conflicting types for built-in function 'strrchr'; expected 'char *(const char *, int)' [-Wbuiltin-declaration-mismatch]
+   91 | char strrchr ();
+      |      ^~~~~~~
+conftest.c:79:1: note: 'strrchr' is declared in header '<string.h>'
+   78 | # include <limits.h>
+   79 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for strstr
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:92:6: warning: conflicting types for built-in function 'strstr'; expected 'char *(const char *, const char *)' [-Wbuiltin-declaration-mismatch]
+   92 | char strstr ();
+      |      ^~~~~~
+conftest.c:80:1: note: 'strstr' is declared in header '<string.h>'
+   79 | # include <limits.h>
+   80 | #else
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for strtol
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:93:6: warning: incompatible redeclaration of library function 'strtol' [-Wincompatible-library-redeclaration]
-char strtol ();
-     ^
-conftest.c:93:6: note: 'strtol' is a builtin with type 'long (const char *, char **, int)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17942: checking for strtoull
-configure:17942: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:94:6: warning: incompatible redeclaration of library function 'strtoull' [-Wincompatible-library-redeclaration]
-char strtoull ();
-     ^
-conftest.c:94:6: note: 'strtoull' is a builtin with type 'unsigned long long (const char *, char **, int)'
-1 warning generated.
+configure:17942: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17942: $? = 0
 configure:17942: result: yes
 configure:17952: checking for getopt
-configure:17952: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17952: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17952: $? = 0
 configure:17952: result: yes
 configure:17966: checking for strcasecmp
-configure:17966: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:17966: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
+conftest.c:96:6: warning: conflicting types for built-in function 'strcasecmp'; expected 'int(const char *, const char *)' [-Wbuiltin-declaration-mismatch]
+   96 | char strcasecmp ();
+      |      ^~~~~~~~~~
 configure:17966: $? = 0
 configure:17966: result: yes
 configure:17980: checking for strtoul
-configure:17980: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
-conftest.c:97:6: warning: incompatible redeclaration of library function 'strtoul' [-Wincompatible-library-redeclaration]
-char strtoul ();
-     ^
-conftest.c:97:6: note: 'strtoul' is a builtin with type 'unsigned long (const char *, char **, int)'
-1 warning generated.
+configure:17980: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:17980: $? = 0
 configure:17980: result: yes
 configure:17994: checking for strtoull
 configure:17994: result: yes
 configure:18008: checking for lfind
-configure:18008: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lm  >&5
+configure:18008: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lm  >&5
 configure:18008: $? = 0
 configure:18008: result: yes
 configure:18023: checking native cpu bit order
@@ -1621,105 +1637,105 @@ configure:18028: result: lsb2msb
 configure:18089: checking for special C compiler options needed for large files
 configure:18134: result: no
 configure:18140: checking for _FILE_OFFSET_BITS value needed for large files
-configure:18165: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:18165: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:18165: $? = 0
 configure:18197: result: no
 configure:18427: checking for inflateEnd in -lz
-configure:18452: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lz  -lm  >&5
+configure:18452: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lz  -lm  >&5
 configure:18452: $? = 0
 configure:18461: result: yes
 configure:18476: checking zlib.h usability
-configure:18476: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:18476: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:18476: $? = 0
 configure:18476: result: yes
 configure:18476: checking zlib.h presence
-configure:18476: afl-clang-lto -E  conftest.c
+configure:18476: gcc -E  conftest.c
 configure:18476: $? = 0
 configure:18476: result: yes
 configure:18476: checking for zlib.h
 configure:18476: result: yes
 configure:18552: checking for jpeg_read_scanlines in -ljpeg
-configure:18577: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -ljpeg  -lz -lm  >&5
+configure:18577: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -ljpeg  -lz -lm  >&5
 configure:18577: $? = 0
 configure:18586: result: yes
 configure:18601: checking jpeglib.h usability
-configure:18601: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:18601: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:18601: $? = 0
 configure:18601: result: yes
 configure:18601: checking jpeglib.h presence
-configure:18601: afl-clang-lto -E  conftest.c
+configure:18601: gcc -E  conftest.c
 configure:18601: $? = 0
 configure:18601: result: yes
 configure:18601: checking for jpeglib.h
 configure:18601: result: yes
 configure:18686: checking for jbg_dec_init in -ljbig
-configure:18711: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -ljbig  -ljpeg -lz -lm  >&5
+configure:18711: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -ljbig  -ljpeg -lz -lm  >&5
 configure:18711: $? = 0
 configure:18720: result: yes
 configure:18735: checking jbig.h usability
-configure:18735: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:18735: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:18735: $? = 0
 configure:18735: result: yes
 configure:18735: checking jbig.h presence
-configure:18735: afl-clang-lto -E  conftest.c
+configure:18735: gcc -E  conftest.c
 configure:18735: $? = 0
 configure:18735: result: yes
 configure:18735: checking for jbig.h
 configure:18735: result: yes
 configure:18767: checking for jbg_newlen
-configure:18767: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -ljbig -ljpeg -lz -lm  >&5
+configure:18767: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -ljbig -ljpeg -lz -lm  >&5
 configure:18767: $? = 0
 configure:18767: result: yes
 configure:18815: checking for lzma_code in -llzma
-configure:18840: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma  -ljbig -ljpeg -lz -lm  >&5
+configure:18840: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma  -ljbig -ljpeg -lz -lm  >&5
 configure:18840: $? = 0
 configure:18849: result: yes
 configure:18864: checking lzma.h usability
-configure:18864: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
+configure:18864: gcc -c --coverage -Wall -W  conftest.c >&5
 configure:18864: $? = 0
 configure:18864: result: yes
 configure:18864: checking lzma.h presence
-configure:18864: afl-clang-lto -E  conftest.c
+configure:18864: gcc -E  conftest.c
 configure:18864: $? = 0
 configure:18864: result: yes
 configure:18864: checking for lzma.h
 configure:18864: result: yes
 configure:18976: checking for X
-configure:19084: afl-clang-lto -E  conftest.c
+configure:19084: gcc -E  conftest.c
 configure:19084: $? = 0
-configure:19115: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lX11 -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19115: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lX11 -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19115: $? = 0
 configure:19165: result: libraries , headers 
-configure:19264: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma -ljbig -ljpeg -lz -lm   -lX11 >&5
+configure:19264: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma -ljbig -ljpeg -lz -lm   -lX11 >&5
 configure:19264: $? = 0
 configure:19362: checking for gethostbyname
-configure:19362: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19362: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19362: $? = 0
 configure:19362: result: yes
 configure:19459: checking for connect
-configure:19459: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19459: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19459: $? = 0
 configure:19459: result: yes
 configure:19508: checking for remove
-configure:19508: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19508: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19508: $? = 0
 configure:19508: result: yes
 configure:19557: checking for shmat
-configure:19557: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19557: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19557: $? = 0
 configure:19557: result: yes
 configure:19615: checking for IceConnectionNumber in -lICE
-configure:19640: afl-clang-lto -o conftest -g -O2 -Wall -W   conftest.c -lICE  -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19640: gcc -o conftest --coverage -Wall -W  --coverage conftest.c -lICE  -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19640: $? = 0
 configure:19649: result: yes
 configure:19790: checking for the pthreads library -lpthreads
-configure:19819: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lpthreads -llzma -ljbig -ljpeg -lz -lm  >&5
-conftest.c:96:41: warning: parameter 'a' set but not used [-Wunused-but-set-parameter]
-                     static void routine(void* a) {a=0;}
-                                               ^
-1 warning generated.
-ld.lld: error: unable to find library -lpthreads
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure:19819: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lpthreads -llzma -ljbig -ljpeg -lz -lm  >&5
+conftest.c: In function 'routine':
+conftest.c:96:48: warning: parameter 'a' set but not used [-Wunused-but-set-parameter]
+   96 |                      static void routine(void* a) {a=0;}
+      |                                          ~~~~~~^
+/usr/bin/ld: cannot find -lpthreads: No such file or directory
+collect2: error: ld returned 1 exit status
 configure:19819: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1833,25 +1849,28 @@ configure: failed program was:
 | }
 configure:19828: result: no
 configure:19735: checking whether pthreads work without any flags
-configure:19819: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c  -llzma -ljbig -ljpeg -lz -lm  >&5
-conftest.c:96:41: warning: parameter 'a' set but not used [-Wunused-but-set-parameter]
-                     static void routine(void* a) {a=0;}
-                                               ^
-1 warning generated.
+configure:19819: gcc -o conftest --coverage -Wall -W   --coverage conftest.c  -llzma -ljbig -ljpeg -lz -lm  >&5
+conftest.c: In function 'routine':
+conftest.c:96:48: warning: parameter 'a' set but not used [-Wunused-but-set-parameter]
+   96 |                      static void routine(void* a) {a=0;}
+      |                                          ~~~~~~^
 configure:19819: $? = 0
 configure:19828: result: yes
 configure:19845: checking for joinable pthread attribute
-configure:19860: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c  -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:19860: gcc -o conftest --coverage -Wall -W   --coverage conftest.c  -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:19860: $? = 0
 configure:19866: result: PTHREAD_CREATE_JOINABLE
 configure:19876: checking if more special flags are required for pthreads
 configure:19883: result: no
 configure:19971: checking whether we are using the Microsoft C compiler
-configure:19990: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:101:8: error: use of undeclared identifier 'choke'
-       choke me
-       ^
-1 error generated.
+configure:19990: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c: In function 'main':
+conftest.c:101:8: error: unknown type name 'choke'
+  101 |        choke me
+      |        ^~~~~
+conftest.c:101:14: warning: unused variable 'me' [-Wunused-variable]
+  101 |        choke me
+      |              ^~
 configure:19990: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -1962,21 +1981,21 @@ configure: failed program was:
 | }
 configure:19999: result: no
 configure:20019: checking GL/gl.h usability
-configure:20019: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
+configure:20019: gcc -c --coverage -Wall -W   conftest.c >&5
 configure:20019: $? = 0
 configure:20019: result: yes
 configure:20019: checking GL/gl.h presence
-configure:20019: afl-clang-lto -E   conftest.c
+configure:20019: gcc -E   conftest.c
 configure:20019: $? = 0
 configure:20019: result: yes
 configure:20019: checking for GL/gl.h
 configure:20019: result: yes
 configure:20019: checking OpenGL/gl.h usability
-configure:20019: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
-conftest.c:130:10: fatal error: 'OpenGL/gl.h' file not found
-#include <OpenGL/gl.h>
-         ^~~~~~~~~~~~~
-1 error generated.
+configure:20019: gcc -c --coverage -Wall -W   conftest.c >&5
+conftest.c:130:10: fatal error: OpenGL/gl.h: No such file or directory
+  130 | #include <OpenGL/gl.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
 configure:20019: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2111,11 +2130,11 @@ configure: failed program was:
 | #include <OpenGL/gl.h>
 configure:20019: result: no
 configure:20019: checking OpenGL/gl.h presence
-configure:20019: afl-clang-lto -E   conftest.c
-conftest.c:97:10: fatal error: 'OpenGL/gl.h' file not found
-#include <OpenGL/gl.h>
-         ^~~~~~~~~~~~~
-1 error generated.
+configure:20019: gcc -E   conftest.c
+conftest.c:97:10: fatal error: OpenGL/gl.h: No such file or directory
+   97 | #include <OpenGL/gl.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
 configure:20019: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2219,11 +2238,11 @@ configure:20019: result: no
 configure:20019: checking for OpenGL/gl.h
 configure:20019: result: no
 configure:20033: checking windows.h usability
-configure:20033: afl-clang-lto -c -g -O2 -Wall -W  conftest.c >&5
-conftest.c:130:10: fatal error: 'windows.h' file not found
-#include <windows.h>
-         ^~~~~~~~~~~
-1 error generated.
+configure:20033: gcc -c --coverage -Wall -W  conftest.c >&5
+conftest.c:130:10: fatal error: windows.h: No such file or directory
+  130 | #include <windows.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
 configure:20033: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2358,11 +2377,11 @@ configure: failed program was:
 | #include <windows.h>
 configure:20033: result: no
 configure:20033: checking windows.h presence
-configure:20033: afl-clang-lto -E  conftest.c
-conftest.c:97:10: fatal error: 'windows.h' file not found
-#include <windows.h>
-         ^~~~~~~~~~~
-1 error generated.
+configure:20033: gcc -E  conftest.c
+conftest.c:97:10: fatal error: windows.h: No such file or directory
+   97 | #include <windows.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
 configure:20033: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2466,9 +2485,9 @@ configure:20033: result: no
 configure:20033: checking for windows.h
 configure:20033: result: no
 configure:20046: checking for OpenGL library
-configure:20089: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lopengl32  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
-ld.lld: error: unable to find library -lopengl32
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure:20089: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lopengl32  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+/usr/bin/ld: cannot find -lopengl32: No such file or directory
+collect2: error: ld returned 1 exit status
 configure:20089: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2585,9 +2604,9 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20114: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lopengl32 -L/usr/lib64/nvidia  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
-ld.lld: error: unable to find library -lopengl32
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure:20114: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lopengl32 -L/usr/lib64/nvidia  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+/usr/bin/ld: cannot find -lopengl32: No such file or directory
+collect2: error: ld returned 1 exit status
 configure:20114: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2704,9 +2723,19 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20139: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lopengl32 -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
-ld.lld: error: unable to find library -lopengl32
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+configure:20139: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lopengl32 -dylib_file /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+cc1: warning: unrecognized gcc debugging option: y
+cc1: warning: unrecognized gcc debugging option: l
+cc1: warning: unrecognized gcc debugging option: i
+cc1: warning: unrecognized gcc debugging option: b
+cc1: warning: unrecognized gcc debugging option: _
+cc1: warning: unrecognized gcc debugging option: f
+cc1: warning: unrecognized gcc debugging option: i
+cc1: warning: unrecognized gcc debugging option: l
+cc1: warning: unrecognized gcc debugging option: e
+/usr/bin/ld: cannot find -lopengl32: No such file or directory
+/usr/bin/ld: cannot find /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib: No such file or directory
+collect2: error: ld returned 1 exit status
 configure:20139: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2823,15 +2852,15 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20089: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:20089: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
 configure:20089: $? = 0
 configure:20185: result: -lGL
 configure:20211: checking GL/glu.h usability
-configure:20211: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
-conftest.c:130:10: fatal error: 'GL/glu.h' file not found
-#include <GL/glu.h>
-         ^~~~~~~~~~
-1 error generated.
+configure:20211: gcc -c --coverage -Wall -W   conftest.c >&5
+conftest.c:130:10: fatal error: GL/glu.h: No such file or directory
+  130 | #include <GL/glu.h>
+      |          ^~~~~~~~~~
+compilation terminated.
 configure:20211: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -2966,11 +2995,11 @@ configure: failed program was:
 | #include <GL/glu.h>
 configure:20211: result: no
 configure:20211: checking GL/glu.h presence
-configure:20211: afl-clang-lto -E   conftest.c
-conftest.c:97:10: fatal error: 'GL/glu.h' file not found
-#include <GL/glu.h>
-         ^~~~~~~~~~
-1 error generated.
+configure:20211: gcc -E   conftest.c
+conftest.c:97:10: fatal error: GL/glu.h: No such file or directory
+   97 | #include <GL/glu.h>
+      |          ^~~~~~~~~~
+compilation terminated.
 configure:20211: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -3074,11 +3103,11 @@ configure:20211: result: no
 configure:20211: checking for GL/glu.h
 configure:20211: result: no
 configure:20211: checking OpenGL/glu.h usability
-configure:20211: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
-conftest.c:130:10: fatal error: 'OpenGL/glu.h' file not found
-#include <OpenGL/glu.h>
-         ^~~~~~~~~~~~~~
-1 error generated.
+configure:20211: gcc -c --coverage -Wall -W   conftest.c >&5
+conftest.c:130:10: fatal error: OpenGL/glu.h: No such file or directory
+  130 | #include <OpenGL/glu.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
 configure:20211: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -3213,11 +3242,11 @@ configure: failed program was:
 | #include <OpenGL/glu.h>
 configure:20211: result: no
 configure:20211: checking OpenGL/glu.h presence
-configure:20211: afl-clang-lto -E   conftest.c
-conftest.c:97:10: fatal error: 'OpenGL/glu.h' file not found
-#include <OpenGL/glu.h>
-         ^~~~~~~~~~~~~~
-1 error generated.
+configure:20211: gcc -E   conftest.c
+conftest.c:97:10: fatal error: OpenGL/glu.h: No such file or directory
+   97 | #include <OpenGL/glu.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
 configure:20211: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -3321,7 +3350,7 @@ configure:20211: result: no
 configure:20211: checking for OpenGL/glu.h
 configure:20211: result: no
 configure:20225: checking for OpenGL Utility library
-configure:20271: g++ -o conftest -g -O2    conftest.cpp -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:20271: g++ -o conftest -g -O2   --coverage conftest.cpp -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
 conftest.cpp:106:5: error: #error no glu.h
   106 | #   error no glu.h
       |     ^~~~~
@@ -3445,7 +3474,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20304: g++ -o conftest -g -O2    conftest.cpp -lglu32 -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:20304: g++ -o conftest -g -O2   --coverage conftest.cpp -lglu32 -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
 conftest.cpp:106:5: error: #error no glu.h
   106 | #   error no glu.h
       |     ^~~~~
@@ -3569,7 +3598,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20304: g++ -o conftest -g -O2    conftest.cpp -lGLU -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
+configure:20304: g++ -o conftest -g -O2   --coverage conftest.cpp -lGLU -lGL  -lm -llzma -ljbig -ljpeg -lz -lm  >&5
 conftest.cpp:106:5: error: #error no glu.h
   106 | #   error no glu.h
       |     ^~~~~
@@ -3695,11 +3724,11 @@ configure: failed program was:
 | }
 configure:20332: result: no
 configure:20393: checking GL/glut.h usability
-configure:20393: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
-conftest.c:130:10: fatal error: 'GL/glut.h' file not found
-#include <GL/glut.h>
-         ^~~~~~~~~~~
-1 error generated.
+configure:20393: gcc -c --coverage -Wall -W   conftest.c >&5
+conftest.c:130:10: fatal error: GL/glut.h: No such file or directory
+  130 | #include <GL/glut.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
 configure:20393: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -3834,11 +3863,11 @@ configure: failed program was:
 | #include <GL/glut.h>
 configure:20393: result: no
 configure:20393: checking GL/glut.h presence
-configure:20393: afl-clang-lto -E   conftest.c
-conftest.c:97:10: fatal error: 'GL/glut.h' file not found
-#include <GL/glut.h>
-         ^~~~~~~~~~~
-1 error generated.
+configure:20393: gcc -E   conftest.c
+conftest.c:97:10: fatal error: GL/glut.h: No such file or directory
+   97 | #include <GL/glut.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
 configure:20393: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -3942,11 +3971,11 @@ configure:20393: result: no
 configure:20393: checking for GL/glut.h
 configure:20393: result: no
 configure:20393: checking GLUT/glut.h usability
-configure:20393: afl-clang-lto -c -g -O2 -Wall -W   conftest.c >&5
-conftest.c:130:10: fatal error: 'GLUT/glut.h' file not found
-#include <GLUT/glut.h>
-         ^~~~~~~~~~~~~
-1 error generated.
+configure:20393: gcc -c --coverage -Wall -W   conftest.c >&5
+conftest.c:130:10: fatal error: GLUT/glut.h: No such file or directory
+  130 | #include <GLUT/glut.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
 configure:20393: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -4081,11 +4110,11 @@ configure: failed program was:
 | #include <GLUT/glut.h>
 configure:20393: result: no
 configure:20393: checking GLUT/glut.h presence
-configure:20393: afl-clang-lto -E   conftest.c
-conftest.c:97:10: fatal error: 'GLUT/glut.h' file not found
-#include <GLUT/glut.h>
-         ^~~~~~~~~~~~~
-1 error generated.
+configure:20393: gcc -E   conftest.c
+conftest.c:97:10: fatal error: GLUT/glut.h: No such file or directory
+   97 | #include <GLUT/glut.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
 configure:20393: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -4189,14 +4218,14 @@ configure:20393: result: no
 configure:20393: checking for GLUT/glut.h
 configure:20393: result: no
 configure:20414: checking for GLUT library
-configure:20459: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lglut32  -lSM -lICE -lXi   -llzma -ljbig -ljpeg -lz -lm  >&5
-conftest.c:106:5: error: no glut.h
-#   error no glut.h
-    ^
-conftest.c:111:1: warning: implicit declaration of function 'glutMainLoop' is invalid in C99 [-Wimplicit-function-declaration]
-glutMainLoop()
-^
-1 warning and 1 error generated.
+configure:20459: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lglut32  -lSM -lICE -lXi   -llzma -ljbig -ljpeg -lz -lm  >&5
+conftest.c:106:5: error: #error no glut.h
+  106 | #   error no glut.h
+      |     ^~~~~
+conftest.c: In function 'main':
+conftest.c:111:1: warning: implicit declaration of function 'glutMainLoop' [-Wimplicit-function-declaration]
+  111 | glutMainLoop()
+      | ^~~~~~~~~~~~
 configure:20459: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -4313,14 +4342,14 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:20459: afl-clang-lto -o conftest -g -O2 -Wall -W    conftest.c -lglut  -lSM -lICE -lXi   -llzma -ljbig -ljpeg -lz -lm  >&5
-conftest.c:106:5: error: no glut.h
-#   error no glut.h
-    ^
-conftest.c:111:1: warning: implicit declaration of function 'glutMainLoop' is invalid in C99 [-Wimplicit-function-declaration]
-glutMainLoop()
-^
-1 warning and 1 error generated.
+configure:20459: gcc -o conftest --coverage -Wall -W   --coverage conftest.c -lglut  -lSM -lICE -lXi   -llzma -ljbig -ljpeg -lz -lm  >&5
+conftest.c:106:5: error: #error no glut.h
+  106 | #   error no glut.h
+      |     ^~~~~
+conftest.c: In function 'main':
+conftest.c:111:1: warning: implicit declaration of function 'glutMainLoop' [-Wimplicit-function-declaration]
+  111 | glutMainLoop()
+      | ^~~~~~~~~~~~
 configure:20459: $? = 1
 configure: failed program was:
 | /* confdefs.h */
@@ -4498,10 +4527,10 @@ ac_cv_c_inline=inline
 ac_cv_cxx_compiler_gnu=yes
 ac_cv_env_CCC_set=
 ac_cv_env_CCC_value=
-ac_cv_env_CC_set=set
-ac_cv_env_CC_value=afl-clang-lto
-ac_cv_env_CFLAGS_set=
-ac_cv_env_CFLAGS_value=
+ac_cv_env_CC_set=
+ac_cv_env_CC_value=
+ac_cv_env_CFLAGS_set=set
+ac_cv_env_CFLAGS_value=--coverage
 ac_cv_env_CPPFLAGS_set=
 ac_cv_env_CPPFLAGS_value=
 ac_cv_env_CPP_set=
@@ -4512,8 +4541,8 @@ ac_cv_env_CXXFLAGS_set=
 ac_cv_env_CXXFLAGS_value=
 ac_cv_env_CXX_set=
 ac_cv_env_CXX_value=
-ac_cv_env_LDFLAGS_set=
-ac_cv_env_LDFLAGS_value=
+ac_cv_env_LDFLAGS_set=set
+ac_cv_env_LDFLAGS_value=--coverage
 ac_cv_env_LIBS_set=
 ac_cv_env_LIBS_value=
 ac_cv_env_XMKMF_set=
@@ -4594,10 +4623,10 @@ ac_cv_path_install='/usr/bin/install -c'
 ac_cv_path_lt_DD=/usr/bin/dd
 ac_cv_path_mkdir=/usr/bin/mkdir
 ac_cv_prog_AWK=mawk
-ac_cv_prog_CPP='afl-clang-lto -E'
+ac_cv_prog_CPP='gcc -E'
 ac_cv_prog_CXXCPP='g++ -E'
 ac_cv_prog_ac_ct_AR=ar
-ac_cv_prog_ac_ct_CC=afl-clang-lto
+ac_cv_prog_ac_ct_CC=gcc
 ac_cv_prog_ac_ct_CXX=g++
 ac_cv_prog_ac_ct_MANIFEST_TOOL=mt
 ac_cv_prog_ac_ct_OBJDUMP=objdump
@@ -4642,7 +4671,7 @@ lt_cv_ld_reload_flag=-r
 lt_cv_nm_interface='BSD nm'
 lt_cv_objdir=.libs
 lt_cv_path_LD=/usr/bin/ld
-lt_cv_path_LDCXX=/usr/bin/ld
+lt_cv_path_LDCXX='/usr/bin/ld -m elf_x86_64'
 lt_cv_path_NM='/usr/bin/nm -B'
 lt_cv_path_mainfest_tool=no
 lt_cv_prog_compiler_c_o=yes
@@ -4651,8 +4680,8 @@ lt_cv_prog_compiler_pic='-fPIC -DPIC'
 lt_cv_prog_compiler_pic_CXX='-fPIC -DPIC'
 lt_cv_prog_compiler_pic_works=yes
 lt_cv_prog_compiler_pic_works_CXX=yes
-lt_cv_prog_compiler_rtti_exceptions=yes
-lt_cv_prog_compiler_static_works=no
+lt_cv_prog_compiler_rtti_exceptions=no
+lt_cv_prog_compiler_static_works=yes
 lt_cv_prog_compiler_static_works_CXX=yes
 lt_cv_prog_gnu_ld=yes
 lt_cv_prog_gnu_ldcxx=yes
@@ -4688,10 +4717,10 @@ AUTOCONF='${SHELL} /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/config/missing 
 AUTOHEADER='${SHELL} /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/config/missing autoheader'
 AUTOMAKE='${SHELL} /home/fuzz/project/fuzzing_libtiff/tiff-4.0.4/config/missing automake-1.15'
 AWK='mawk'
-CC='afl-clang-lto'
+CC='gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-g -O2 -Wall -W'
-CPP='afl-clang-lto -E'
+CFLAGS='--coverage -Wall -W'
+CPP='gcc -E'
 CPPFLAGS=''
 CXX='g++'
 CXXCPP='g++ -E'
@@ -4734,8 +4763,8 @@ INSTALL_DATA='${INSTALL} -m 644'
 INSTALL_PROGRAM='${INSTALL}'
 INSTALL_SCRIPT='${INSTALL}'
 INSTALL_STRIP_PROGRAM='$(install_sh) -c -s'
-LD='/usr/bin/ld'
-LDFLAGS=''
+LD='/usr/bin/ld -m elf_x86_64'
+LDFLAGS='--coverage'
 LIBDIR=''
 LIBOBJS=''
 LIBS='-llzma -ljbig -ljpeg -lz -lm '
@@ -4744,7 +4773,7 @@ LIBTIFF_DOCDIR='${prefix}/share/doc/tiff-4.0.4'
 LIBTIFF_MAJOR_VERSION='4'
 LIBTIFF_MICRO_VERSION='4'
 LIBTIFF_MINOR_VERSION='0'
-LIBTIFF_RELEASE_DATE='20240207'
+LIBTIFF_RELEASE_DATE='20240213'
 LIBTIFF_VERSION='4.0.4'
 LIBTIFF_VERSION_INFO='7:2:2'
 LIBTOOL='$(SHELL) $(top_builddir)/libtool'
@@ -4771,7 +4800,7 @@ PACKAGE_TARNAME='tiff'
 PACKAGE_URL=''
 PACKAGE_VERSION='4.0.4'
 PATH_SEPARATOR=':'
-PTHREAD_CC='afl-clang-lto'
+PTHREAD_CC='gcc'
 PTHREAD_CFLAGS=''
 PTHREAD_LIBS=''
 RANLIB='ranlib'
@@ -4788,7 +4817,7 @@ X_EXTRA_LIBS=''
 X_LIBS=''
 X_PRE_LIBS=' -lSM -lICE'
 ac_ct_AR='ar'
-ac_ct_CC='afl-clang-lto'
+ac_ct_CC='gcc'
 ac_ct_CXX='g++'
 ac_ct_DUMPBIN=''
 am__EXEEXT_FALSE=''

@@ -142,4 +142,23 @@ $ grep ERROR crash.log
 ==1136950==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000f1 at pc 0x5566ab2006d1 bp 0x7ffd10133b50 sp 0x7ffd10133318
 ==1136952==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000000b1 at pc 0x55ec9b8b06d1 bp 0x7ffc306eccd0 sp 0x7ffc306ec498
 ```
-모든 크래시에 대해 heap-based buffer overflow가 발생했다. 0번 id 크래쉬를 targetcrash로 rename후 해당 크래시가 입력으로 주어졌을 때 Code coverage를 측정해본다. 
+모든 크래시에 대해 heap-based buffer overflow가 발생했다.
+
+## Code coverage measure
+모든 크래시에 대해 프로그램을 실행시켜보고 Code coverage를 측정해보자. 다시 "--coverage" 플래그를 추가해 프로그램을 빌드하고 다음과 같이 Code coverage를 측정했다. 
+```bash
+$ cd $HOME/project/fuzzing_libtiff/tiff-4.0.4/
+$ lcov --zerocounters --directory ./
+$ lcov --capture --initial --directory ./ --output-file app.info
+$ for file in ../output/default/crashes/*; do
+> ../install/bin/tiffinfo -D -j -c -r -s -w $file 
+> done
+$ lcov --no-checksum --directory ./ --capture --output-file app2.info
+$ genhtml --highlight --legend -output-directory ./html-coverage ./app2.info
+```
+
+![Report2](./images/libtiff_report2.png)
+
+위 Code coverage report를 통해 코드의 어느 부분이 실행되었는지 확인할 수 있다. 이 정보는 디버깅에 유용하게 사용될 수 있다.
+
+## Debug

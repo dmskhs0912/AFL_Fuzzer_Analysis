@@ -1,4 +1,2 @@
-dummy.lo: /usr/lib/llvm-14/lib/clang/14.0.0/share/asan_ignorelist.txt \
-  dummy.c
-
-/usr/lib/llvm-14/lib/clang/14.0.0/share/asan_ignorelist.txt:
+dummy.lo: dummy.c /usr/include/stdc-predef.h
+/usr/include/stdc-predef.h:
