@@ -162,3 +162,57 @@ $ genhtml --highlight --legend -output-directory ./html-coverage ./app2.info
 위 Code coverage report를 통해 코드의 어느 부분이 실행되었는지 확인할 수 있다. 이 정보는 디버깅에 유용하게 사용될 수 있다.
 
 ## Debug
+ASAN 결과를 봤을 때 fputs에서 BOF(엄밀히는 Out-of-Bound Read 이다.)가 발생했고, BOF가 발생한 힙 영역은 tif_dirread.c의 TIFFFetchNormalTag 함수에서 할당하게 된다. 
+
+![Allocation](./images/libtiff_allocate.png)
+
+다음은 tif_dirread.c의 5164행 부근 코드 일부이다.
+
+```c
+case TIFF_SETGET_C32_ASCII:
+	{
+		uint8* data;
+		assert(fip->field_readcount==TIFF_VARIABLE2);
+		assert(fip->field_passcount==1);
+		err=TIFFReadDirEntryByteArray(tif,dp,&data);
+		if (err==TIFFReadDirEntryErrOk)
+		{
+			int m;
+			m=TIFFSetField(tif,dp->tdir_tag,(uint32)(dp->tdir_count),data); // 5164행
+			if (data!=0)
+				_TIFFfree(data);
+			if (!m)
+				return(0);
+		}
+	}
+```
+
+TIFFFetchNormalTag 함수에서는 TIFF 데이터 필드의 타입에 따라 Field entry를 할당하고 데이터를 파싱해 저장한다. 여기서 ASCII 타입인 경우 dp->tdir_count를 크기로 하는 문자열 data를 할당하게 되는데, 만약 문자열 data가 실제로는 tdir_count 보다 큰 경우 tif_print.c의 _TIFFPrintField에서 오버 리드가 발생하게 된다. 
+
+* _TIFFPrintField
+```c
+else if(fip->field_type == TIFF_ASCII) {
+	fprintf(fd, "%s", (char *) raw_data);
+	break;
+}
+```
+이 함수에서 %s로 버퍼를 읽기 때문에 data[dp->tdir_count-1]이 널 문자가 아닌 경우 버퍼를 넘어 읽게 되는 것이다.
+
+![data](./images/libtiff_data.png)
+
+위 사진에서 볼 수 있듯이 data에서 Improper Null termination이 발생했기 때문에 버퍼를 넘는 0x5555555c0f91 이후 주소의 내용까지 읽어들이게 된다. 
+
+## Fix the issue
+결론적으로 문자열에서 Null termination이 제대로 이루어지는지 확인하지 않고 메모리를 할당해 발생한 취약점이다. 따라서 TIFFFetchNormalTag에서 ASCII 타입의 set field를 하기 전 data[tdir_count-1]이 NULL인지 체크하는 부분을 추가하면 취약점이 보완된다. 다음은 LibTIFF의 공식 패치 중 일부이다.
+```c
+if( data[dp->tdir_count-1] != '\0' )
+{
+        TIFFWarningExt(tif->tif_clientdata,module,"ASCII value for tag \"%s\" does not end in null byte. Forcing it to be null",fip->field_name);
+        data[dp->tdir_count-1] = '\0';
+}
+```
+위 코드는 TIFFFetchNormalTag에서 TIFF_SETGET_C16_ASCII, TIFF_SETGET_C32_ASCII 타입일 때 TIFFSetField 함수를 호출하기 전 추가된 코드이다. 문자열에서 널 종단이 이루어지지 않은 경우 문자열의 마지막 문자를 널 종단 문자로 대체하고 있다.
+
+![Fix](./images/libtiff_fix.png)
+
+코드를 수정한 뒤 실행한 결과 "TIFFFetchNormalTag: Warning, ASCII value for tag "Tag 32817" does not end in null byte. Forcing it to be null." 와 같은 경고 메시지가 추가되었고 Tag 32817의 문자열에 대해 Null Termination이 제대로 이루어졌다. 
